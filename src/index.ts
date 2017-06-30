@@ -1,8 +1,8 @@
 import * as Hapi from 'hapi';
 
 import Logger from './helper/logger';
-import * as Router from './router';
 import Plugins from './plugins';
+import Router from './router';
 
 class Server {
     static async init() : Promise<any> {
