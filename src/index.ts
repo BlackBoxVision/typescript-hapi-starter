@@ -6,27 +6,27 @@ import Plugins from './plugins';
 
 class Server {
     public static init() : void {
-        const server = new Hapi.Server();
+        try {
+            const server = new Hapi.Server();
 
-        server.connection({
-            host: process.env.HOST,
-            port: process.env.PORT
-        });
+            server.connection({
+                host: process.env.HOST,
+                port: process.env.PORT
+            });
 
-        if (process.env.NODE_ENV === 'development') {
-            Plugins.status(server);
-            Plugins.swagger(server);
-        }
-
-        Router.register(server);
-
-        server.start(error =>  {
-            if (error) {
-                Logger.info(`There was something wrong: ${error}`);
+            if (process.env.NODE_ENV === 'development') {
+                Plugins.status(server);
+                Plugins.swagger(server);
             }
 
+            Router.register(server);
+
+            await server.start();
+
             Logger.info('Server is up and running!');
-        });
+        } catch(error) {
+            Logger.info(`There was something wrong: ${error}`);
+        }
     }
 }
 
