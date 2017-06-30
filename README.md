@@ -33,11 +33,11 @@ This is not finished, there's still a lot of things to improve. Here you got som
 
 ## Issues
 
-If you found a bug, or you have an answer, or whatever. Please, raise an issue.
+If you found a bug, or you have an answer, or whatever. Please, raise an [issue](https://github.com/BlackBoxVision/typescript-hapi-starter/issues/new).
 
 ## Contributing
 
 Of course, if you see something that you want to upgrade from this library, or a bug that needs to be solved, PRs are welcome!
 
 ## License
-Distributed under the **MIT license**. See LICENSE for more information.
+Distributed under the **MIT license**. See [LICENSE](https://github.com/BlackBoxVision/typescript-hapi-starter/blob/master/LICENSE) for more information.
