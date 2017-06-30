@@ -10,15 +10,15 @@ export default class Repository<T> {
     }
 
     public getAll() {
-        const data : T[] = [];
+        const data: T[] = [];
 
-        this.dataSource.forEach((value : T) => data.push(value));
+        this.dataSource.forEach((value: T) => data.push(value));
 
         return data;
     }
 
     public updateById(id: string, dataToUpdate: T): void {
-        const data : T = this.dataSource.get(id);
+        const data: T = this.dataSource.get(id);
 
         if (data) {
             this.dataSource.delete(id);

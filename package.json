@@ -1,5 +1,5 @@
 {
-  "name": "typescript-example",
+  "name": "typescript-hapi-starter",
   "version": "1.0.0",
   "description": "Simple Typescript project.",
   "main": "src/index",
