@@ -1,6 +1,6 @@
 # TypeScript + Hapi = <3
 
-This is a super simple starter kit to develop apps with HapiJS + TypeScript
+This is a super simple starter kit to develop APIs with HapiJS + TypeScript
 
 ## What currently supports? 
 
@@ -22,22 +22,22 @@ This starter kit comes with the following features:
 
 This is not finished, there's still a lot of things to improve. Here you got some:
 
-[] Add GraphQL support
-[] Add support for Auth with JWT or Sessions
-[] Add support for TypeORM/Mongoose
-[] Add Production build scripts
-[] Simple test suite
-[] Add support for Jenkins pipeline
-[] Add support for test coverage
-[] Add DockerFile + docker-compose with config to simplify development and production deployment
+- [ ] Add GraphQL support
+- [ ] Add support for Auth with JWT or Sessions
+- [ ] Add support for TypeORM/Mongoose
+- [ ] Add Production build scripts
+- [ ] Simple test suite
+- [ ] Add support for Jenkins pipeline
+- [ ] Add support for test coverage
+- [ ] Add DockerFile + docker-compose with config to simplify development and production deployment
 
-##Issues
+## Issues
 
 If you found a bug, or you have an answer, or whatever. Please, raise an issue.
 
-##Contributing
+## Contributing
 
 Of course, if you see something that you want to upgrade from this library, or a bug that needs to be solved, PRs are welcome!
 
-##License
+## License
 Distributed under the **MIT license**. See LICENSE for more information.
