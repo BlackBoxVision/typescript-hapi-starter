@@ -5,7 +5,7 @@ import * as Router from './router';
 import Plugins from './plugins';
 
 class Server {
-    public static init() : void {
+    static async init() : Promise<any> {
         try {
             const server = new Hapi.Server();
 
