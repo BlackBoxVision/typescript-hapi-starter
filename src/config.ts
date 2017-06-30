@@ -13,5 +13,13 @@ export default {
             grouping: 'tags',
             sortEndpoints: 'ordered'
         }
+    },
+    status: {
+        options: {
+            title: 'API Monitor',
+            routeConfig: {
+                auth: false
+            }
+        }
     }
-}
+};

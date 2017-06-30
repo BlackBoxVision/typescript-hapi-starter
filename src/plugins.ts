@@ -1,26 +1,21 @@
 import Config from './config';
 
 export default class Plugins {
-    static status(server: any) : void {
+    static status(server: any): void {
         server.register({
-            register: require('hapijs-status-monitor'),
             path: '/status',
-            options: {
-                title: 'API Monitor',
-                routeConfig: {
-                    auth: false
-                }
-            }
+            options: Config.status.options,
+            register: require('hapijs-status-monitor')
         });
     }
 
-    static swagger(server: any) : void {
+    static swagger(server: any): void {
         server.register([
             require('vision'),
             require('inert'),
             {
-                register: require('hapi-swagger'),
-                options: Config.swagger.options
+                options: Config.swagger.options,
+                register: require('hapi-swagger')
             }
         ]);
     }

@@ -5,7 +5,7 @@ import Plugins from './plugins';
 import Router from './router';
 
 class Server {
-    static async init() : Promise<any> {
+    static async init(): Promise<any> {
         try {
             const server = new Hapi.Server();
 
@@ -24,7 +24,7 @@ class Server {
             await server.start();
 
             Logger.info('Server is up and running!');
-        } catch(error) {
+        } catch (error) {
             Logger.info(`There was something wrong: ${error}`);
         }
     }

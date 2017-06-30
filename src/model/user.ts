@@ -3,4 +3,4 @@ export default class User {
     public age: string;
     public name: string;
     public lastName: string;
-};
+}

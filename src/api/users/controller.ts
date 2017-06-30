@@ -1,21 +1,21 @@
 import * as Hapi from 'hapi';
 import * as Boom from 'boom';
 
-import User from "../../model/user";
+import User from '../../model/user';
 import Utils from '../../helper/utils';
 import Logger from '../../helper/logger';
-import Repository from "../../repository";
+import Repository from '../../repository';
 
 export default class UserController {
     static repository: Repository<User> = new Repository<User>();
 
-    static async create(request: Hapi.Request, response: Hapi.ReplyNoContinue) : Promise<any> {
+    static async create(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
         try {
             Logger.info(`POST - ${Utils.getUrl(request)}`);
 
             const user = new User();
 
-            user.id = String(Math.floor((Math.random() * 1500) + 1));
+            user.id = String(Math.floor(Math.random() * 1500 + 1));
             user.age = request.payload.age;
             user.name = request.payload.name;
             user.lastName = request.payload.lastName;
@@ -33,7 +33,7 @@ export default class UserController {
         }
     }
 
-    static async updateById(request: Hapi.Request, response: Hapi.ReplyNoContinue) : Promise<any> {
+    static async updateById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
         try {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
@@ -59,7 +59,7 @@ export default class UserController {
         }
     }
 
-    static async getById(request: Hapi.Request, response: Hapi.ReplyNoContinue) : Promise<any> {
+    static async getById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -79,7 +79,7 @@ export default class UserController {
         }
     }
 
-    static async getAll(request: Hapi.Request, response: Hapi.ReplyNoContinue) : Promise<any> {
+    static async getAll(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -94,7 +94,7 @@ export default class UserController {
         }
     }
 
-    static async deleteById(request: Hapi.Request, response: Hapi.ReplyNoContinue) : Promise<any> {
+    static async deleteById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
         try {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 

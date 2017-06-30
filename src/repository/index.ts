@@ -1,7 +1,7 @@
 export default class Repository<T> {
     public dataSource = new Map();
 
-    public save(id: string, data: T) : void {
+    public save(id: string, data: T): void {
         this.dataSource.set(id, data);
     }
 
@@ -10,15 +10,15 @@ export default class Repository<T> {
     }
 
     public getAll() {
-        const data : T[] = [];
+        const data: T[] = [];
 
         this.dataSource.forEach((value: T) => data.push(value));
 
         return data;
     }
 
-    public updateById(id: string, data: T) : void {
-        const user : T = this.dataSource.get(id);
+    public updateById(id: string, data: T): void {
+        const user: T = this.dataSource.get(id);
 
         if (user) {
             this.dataSource.delete(id);
