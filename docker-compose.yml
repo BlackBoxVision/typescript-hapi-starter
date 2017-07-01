@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    container_name: api-container
+    build: .
+    command: npm run start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - PROJECT_DIR=/usr/app/
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    ports:
+      - "localhost:8080:8080"
