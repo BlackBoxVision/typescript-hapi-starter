@@ -13,6 +13,7 @@ This starter kit comes with the following features:
 - **Daily Rotation Logger + Console Logger** 
 - **Work with Yarn or NPM 5 as dependency resolvers**
 - **Code formatting with Prettier as hook for Pre-commit**
+- **Dockerfile + docker-compose for development**
 
 ## How to use it? 
 
@@ -25,11 +26,9 @@ This is not finished, there's still a lot of things to improve. Here you got som
 - [ ] Add GraphQL support
 - [ ] Add support for Auth with JWT or Sessions
 - [ ] Add support for TypeORM/Mongoose
-- [ ] Add Production build scripts
 - [ ] Simple test suite
 - [ ] Add support for Jenkins pipeline
 - [ ] Add support for test coverage
-- [ ] Add DockerFile + docker-compose with config to simplify development and production deployment
 
 ## Issues
 
