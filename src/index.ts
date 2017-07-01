@@ -9,6 +9,9 @@ class Server {
         try {
             const server = new Hapi.Server();
 
+            Logger.info('HOST -> ' + process.env.HOST);
+            Logger.info('PORT -> ' + process.env.PORT);
+
             server.connection({
                 host: process.env.HOST,
                 port: process.env.PORT,
@@ -23,7 +26,7 @@ class Server {
 
             await server.start();
 
-            Logger.info('Server is up and running!');
+            Logger.info(`Server is up and running`);
         } catch (error) {
             Logger.info(`There was something wrong: ${error}`);
         }

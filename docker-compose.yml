@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: npm run start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    env_file:
+      - .env
+    environment:
+      - PORT=8080
+      - HOST=localhost
+      - PROJECT_DIR=/usr/app/
+      - NODE_ENV=${NODE_ENV}
+      - LOG_LEVEL=${LOG_LEVEL}
+    ports:
+      - "8080:8080"
