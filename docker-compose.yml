@@ -6,13 +6,11 @@ services:
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
-    env_file:
-      - .env
     environment:
       - PORT=8080
-      - HOST=localhost
+      - HOST=0.0.0.0
       - PROJECT_DIR=/usr/app/
-      - NODE_ENV=${NODE_ENV}
-      - LOG_LEVEL=${LOG_LEVEL}
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
     ports:
-      - "8080:8080"
+      - "localhost:8080:8080"
