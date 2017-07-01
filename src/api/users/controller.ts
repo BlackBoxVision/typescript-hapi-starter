@@ -1,6 +1,5 @@
 import * as Hapi from 'hapi';
 import * as Boom from 'boom';
-import * as uuid from 'uuid';
 
 import User from '../../model/user';
 import Utils from '../../helper/utils';
@@ -16,17 +15,16 @@ class UserController {
 
             const user = new User();
 
-            user.id = uuid();
             user.age = request.payload.age;
             user.name = request.payload.name;
             user.lastName = request.payload.last_name;
 
-            this.repository.save(user.id, user);
+            const data = await this.repository.save(user);
 
             return response({
                 statusCode: 200,
                 data: {
-                    id: user.id,
+                    id: data._id,
                 },
             });
         } catch (error) {
@@ -39,7 +37,7 @@ class UserController {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = this.repository.getById(id);
+            const user = await this.repository.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
@@ -49,7 +47,7 @@ class UserController {
             user.name = request.payload.name;
             user.lastName = request.payload.last_name;
 
-            this.repository.updateById(id, user);
+            await this.repository.updateById(id, user);
 
             return response({
                 statusCode: 200,
@@ -65,7 +63,7 @@ class UserController {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = this.repository.getById(id);
+            const user = await this.repository.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
@@ -84,7 +82,7 @@ class UserController {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
-            const users = this.repository.getAll();
+            const users = await this.repository.getAll();
 
             return response({
                 statusCode: 200,
@@ -100,7 +98,7 @@ class UserController {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            this.repository.delete(id);
+            await this.repository.delete(id);
 
             return response({
                 statusCode: 200,

@@ -9,9 +9,6 @@ class Server {
         try {
             const server = new Hapi.Server();
 
-            Logger.info('HOST -> ' + process.env.HOST);
-            Logger.info('PORT -> ' + process.env.PORT);
-
             server.connection({
                 host: process.env.HOST,
                 port: process.env.PORT,

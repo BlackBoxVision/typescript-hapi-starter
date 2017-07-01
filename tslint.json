@@ -10,7 +10,8 @@
         "ordered-imports": false,
         "arrow-parens": false,
         "quotemark": false,
-        "semicolon": false
+        "semicolon": false,
+        "variable-name": false
     },
     "rulesDirectory": []
 }
