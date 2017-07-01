@@ -1,20 +1,20 @@
 FROM node:8.1.2-alpine
 
-MAINTAINER BlackBoxVision
+MAINTAINER BlackBox Vision
+
+RUN rm -rf PROJECT_DIR/node_modules
+
+ADD ./src PROJECT_DIR
+ADD ./logs PROJECT_DIR
+ADD ./data PROJECT_DIR
+
+ADD ./package.json PROJECT_DIR
+ADD ./package-lock.json PROJECT_DIR
+ADD ./tsconfig.json PROJECT_DIR
 
 WORKDIR PROJECT_DIR
 
-COPY package.json .
-COPY package-lock.json .
-COPY yarn.lock .
-
-RUN npm install -g yarn
-RUN yarn install
-
-COPY /src .
-COPY /logs .
-COPY /data .
-
-COPY tsconfig.json .
-
 EXPOSE PORT
+
+RUN npm prune
+RUN npm install

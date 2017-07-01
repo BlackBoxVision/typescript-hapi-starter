@@ -1,5 +1,5 @@
 {
-  "author": "BlackBoxVision",
+  "author": "BlackBox Vision",
   "contributors": [
     "Jonatan E. Salas <jonatansalas@live.com.ar>"
   ],
@@ -11,7 +11,7 @@
     "docker:logs": "docker-compose logs",
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up",
-    "docker:stop": "docker-compose down",
+    "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans",
     "nodemon:build": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/server.ts",
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
@@ -23,6 +23,7 @@
     "hapijs-status-monitor": "^0.5.0",
     "inert": "^4.2.0",
     "joi": "^10.6.0",
+    "uuid": "^3.1.0",
     "vision": "^4.1.1",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6"
@@ -31,6 +32,7 @@
     "@types/hapi": "^16.1.6",
     "@types/joi": "^10.4.0",
     "@types/node": "^8.0.6",
+    "@types/uuid": "^3.0.0",
     "@types/winston": "^2.3.3",
     "dotenv": "^4.0.0",
     "nodemon": "^1.11.0",

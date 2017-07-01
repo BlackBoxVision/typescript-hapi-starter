@@ -6,7 +6,6 @@ services:
     command: npm run nodemon:start
     volumes:
       - .:/usr/app/
-      - /usr/app/node_modules
     environment:
       - PORT=8080
       - HOST=0.0.0.0

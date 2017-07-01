@@ -1,5 +1,6 @@
 import * as Hapi from 'hapi';
 import * as Boom from 'boom';
+import * as uuid from 'uuid';
 
 import User from '../../model/user';
 import Utils from '../../helper/utils';
@@ -15,10 +16,10 @@ class UserController {
 
             const user = new User();
 
-            user.id = String(Math.floor(Math.random() * 1500 + 1));
+            user.id = uuid();
             user.age = request.payload.age;
             user.name = request.payload.name;
-            user.lastName = request.payload.lastName;
+            user.lastName = request.payload.last_name;
 
             this.repository.save(user.id, user);
 
@@ -31,7 +32,7 @@ class UserController {
         } catch (error) {
             return response(Boom.badRequest(error));
         }
-    }
+    };
 
     public updateById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
@@ -46,7 +47,7 @@ class UserController {
 
             user.age = request.payload.age;
             user.name = request.payload.name;
-            user.lastName = request.payload.lastName;
+            user.lastName = request.payload.last_name;
 
             this.repository.updateById(id, user);
 
