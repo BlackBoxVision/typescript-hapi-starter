@@ -35,7 +35,6 @@
     "@types/hapi": "^16.1.6",
     "@types/joi": "^10.4.0",
     "@types/node": "^8.0.6",
-    "@types/node-uuid": "^0.0.28",
     "@types/winston": "^2.3.3",
     "dotenv": "^4.0.0",
     "nodemon": "^1.11.0",
