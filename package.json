@@ -5,6 +5,10 @@
   "main": "src/index",
   "types": "dist/index",
   "scripts": {
+    "docker:start": "docker-compose up",
+    "docker:logs": "docker-compose logs",
+    "docker:ps": "docker-compose ps",
+    "docker:stop": "docker-compose down",
     "start": "npm run build:live",
     "build:live": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/index.ts",
     "lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",

@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: api-container
     build: .
     command: npm run start
     volumes:
