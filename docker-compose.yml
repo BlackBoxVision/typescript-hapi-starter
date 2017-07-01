@@ -3,7 +3,7 @@ services:
   web:
     container_name: api-container
     build: .
-    command: npm run start
+    command: npm run nodemon:start
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
