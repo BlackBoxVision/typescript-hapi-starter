@@ -21,7 +21,7 @@ export default class Repository<T> {
         return new Promise((resolve, reject) => {
             this.dataSource.findOne({ _id }, (error, document) => {
                 if (error) {
-                    reject(error)
+                    reject(error);
                 }
 
                 resolve(document);
@@ -37,13 +37,13 @@ export default class Repository<T> {
                 }
 
                 resolve(documents);
-            })
+            });
         });
     }
 
     public updateById(_id: string, data: T): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataSource.update({_id}, data, undefined, (error) => {
+            this.dataSource.update({ _id }, data, undefined, error => {
                 if (error) {
                     reject(error);
                 }
@@ -55,13 +55,13 @@ export default class Repository<T> {
 
     public delete(_id: string): Promise<string> {
         return new Promise((resolve, reject) => {
-            this.dataSource.remove({ _id }, (error) => {
+            this.dataSource.remove({ _id }, error => {
                 if (error) {
                     reject(error);
                 }
 
                 resolve(_id);
             });
-        })
+        });
     }
 }
