@@ -10,8 +10,8 @@ export default [
             validate: UserValidation.create,
             description: 'Method that creates a new user.',
             tags: ['api', 'users'],
-            auth: false
-        }
+            auth: false,
+        },
     },
     {
         method: 'PUT',
@@ -21,8 +21,8 @@ export default [
             validate: UserValidation.updateById,
             description: 'Method that updates a user by its id.',
             tags: ['api', 'users'],
-            auth: false
-        }
+            auth: false,
+        },
     },
     {
         method: 'GET',
@@ -32,8 +32,8 @@ export default [
             validate: UserValidation.getById,
             description: 'Method that get a user by its id.',
             tags: ['api', 'users'],
-            auth: false
-        }
+            auth: false,
+        },
     },
     {
         method: 'GET',
@@ -42,8 +42,8 @@ export default [
             handler: UserController.getAll,
             description: 'Method that gets all users.',
             tags: ['api', 'users'],
-            auth: false
-        }
+            auth: false,
+        },
     },
     {
         method: 'DELETE',
@@ -53,7 +53,7 @@ export default [
             validate: UserValidation.deleteById,
             description: 'Method that deletes a user by its id.',
             tags: ['api', 'users'],
-            auth: false
-        }
-    }
+            auth: false,
+        },
+    },
 ];

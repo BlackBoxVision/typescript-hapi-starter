@@ -12,7 +12,7 @@ export default class Repository<T> {
     public getAll(): T[] {
         const data = [];
 
-        this.dataSource.forEach(value => data.push(value));
+        this.dataSource.forEach((value) => data.push(value));
 
         return data;
     }

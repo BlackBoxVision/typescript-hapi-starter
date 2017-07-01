@@ -7,9 +7,11 @@
   "scripts": {
     "start": "npm run build:live",
     "build:live": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/index.ts",
-    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 100 --single-quote --write 'src/**/*.ts'"
+    "lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 100 --single-quote --trailing-comma all --write 'src/**/*.ts'"
   },
   "pre-commit": [
+    "lint",
     "prettier"
   ],
   "keywords": [
@@ -41,6 +43,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.5.2",
     "ts-node": "^3.1.0",
+    "tslint": "^5.4.3",
     "typescript": "^2.4.1"
   }
 }

@@ -7,19 +7,19 @@ export default {
                 version: 'v1.0.0',
                 contact: {
                     name: 'John doe',
-                    email: 'johndoe@johndoe.com'
-                }
+                    email: 'johndoe@johndoe.com',
+                },
             },
             grouping: 'tags',
-            sortEndpoints: 'ordered'
-        }
+            sortEndpoints: 'ordered',
+        },
     },
     status: {
         options: {
             title: 'API Monitor',
             routeConfig: {
-                auth: false
-            }
-        }
-    }
+                auth: false,
+            },
+        },
+    },
 };

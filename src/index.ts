@@ -5,13 +5,13 @@ import Plugins from './plugins';
 import Router from './router';
 
 class Server {
-    static async init(): Promise<any> {
+    public static async init(): Promise<any> {
         try {
             const server = new Hapi.Server();
 
             server.connection({
                 host: process.env.HOST,
-                port: process.env.PORT
+                port: process.env.PORT,
             });
 
             if (process.env.NODE_ENV === 'development') {

@@ -7,9 +7,12 @@ import Logger from '../../helper/logger';
 import Repository from '../../repository';
 
 export default class UserController {
-    static repository: Repository<User> = new Repository<User>();
+    public static repository: Repository<User> = new Repository<User>();
 
-    static async create(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
+    public static async create(
+        request: Hapi.Request,
+        response: Hapi.ReplyNoContinue,
+    ): Promise<any> {
         try {
             Logger.info(`POST - ${Utils.getUrl(request)}`);
 
@@ -25,15 +28,18 @@ export default class UserController {
             return response({
                 statusCode: 200,
                 data: {
-                    id: user.id
-                }
+                    id: user.id,
+                },
             });
         } catch (error) {
             return response(Boom.badRequest(error));
         }
     }
 
-    static async updateById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
+    public static async updateById(
+        request: Hapi.Request,
+        response: Hapi.ReplyNoContinue,
+    ): Promise<any> {
         try {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
@@ -52,14 +58,17 @@ export default class UserController {
 
             return response({
                 statusCode: 200,
-                data: user
+                data: user,
             });
         } catch (error) {
             return response(Boom.badRequest(error));
         }
     }
 
-    static async getById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
+    public static async getById(
+        request: Hapi.Request,
+        response: Hapi.ReplyNoContinue,
+    ): Promise<any> {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -72,14 +81,17 @@ export default class UserController {
 
             return response({
                 statusCode: 200,
-                data: user
+                data: user,
             });
         } catch (error) {
             return response(Boom.notFound(error));
         }
     }
 
-    static async getAll(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
+    public static async getAll(
+        request: Hapi.Request,
+        response: Hapi.ReplyNoContinue,
+    ): Promise<any> {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -87,14 +99,17 @@ export default class UserController {
 
             return response({
                 statusCode: 200,
-                data: users
+                data: users,
             });
         } catch (error) {
             return response(Boom.badRequest(error));
         }
     }
 
-    static async deleteById(request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> {
+    public static async deleteById(
+        request: Hapi.Request,
+        response: Hapi.ReplyNoContinue,
+    ): Promise<any> {
         try {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 
@@ -103,9 +118,7 @@ export default class UserController {
 
             return response({
                 statusCode: 200,
-                data: {
-                    id: id
-                }
+                data: { id },
             });
         } catch (error) {
             return response(Boom.badRequest(error));
