@@ -2103,8 +2103,8 @@ typescript:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.1.tgz#c3ccb16ddaa0b2314de031e7e6fee89e5ba346bc"
 
 typestyle:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-1.3.5.tgz#119f0a68161fcad0edbad54c8f123ff741c52539"
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-1.3.7.tgz#7db8d4c2087c3dcac901704f7d5c12b9fe08440f"
   dependencies:
     free-style "2.3.1"
 
