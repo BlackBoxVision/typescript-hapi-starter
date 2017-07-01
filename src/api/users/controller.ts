@@ -6,13 +6,10 @@ import Utils from '../../helper/utils';
 import Logger from '../../helper/logger';
 import Repository from '../../repository';
 
-export default class UserController {
-    public static repository: Repository<User> = new Repository<User>();
+class UserController {
+    public repository: Repository<User> = new Repository<User>();
 
-    public static async create(
-        request: Hapi.Request,
-        response: Hapi.ReplyNoContinue,
-    ): Promise<any> {
+    public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`POST - ${Utils.getUrl(request)}`);
 
@@ -23,7 +20,7 @@ export default class UserController {
             user.name = request.payload.name;
             user.lastName = request.payload.lastName;
 
-            UserController.repository.save(user.id, user);
+            this.repository.save(user.id, user);
 
             return response({
                 statusCode: 200,
@@ -36,15 +33,12 @@ export default class UserController {
         }
     }
 
-    public static async updateById(
-        request: Hapi.Request,
-        response: Hapi.ReplyNoContinue,
-    ): Promise<any> {
+    public updateById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = UserController.repository.getById(id);
+            const user = this.repository.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
@@ -54,7 +48,7 @@ export default class UserController {
             user.name = request.payload.name;
             user.lastName = request.payload.lastName;
 
-            UserController.repository.updateById(id, user);
+            this.repository.updateById(id, user);
 
             return response({
                 statusCode: 200,
@@ -63,17 +57,14 @@ export default class UserController {
         } catch (error) {
             return response(Boom.badRequest(error));
         }
-    }
+    };
 
-    public static async getById(
-        request: Hapi.Request,
-        response: Hapi.ReplyNoContinue,
-    ): Promise<any> {
+    public getById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = UserController.repository.getById(id);
+            const user = this.repository.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
@@ -86,16 +77,13 @@ export default class UserController {
         } catch (error) {
             return response(Boom.notFound(error));
         }
-    }
+    };
 
-    public static async getAll(
-        request: Hapi.Request,
-        response: Hapi.ReplyNoContinue,
-    ): Promise<any> {
+    public getAll = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
-            const users = UserController.repository.getAll();
+            const users = this.repository.getAll();
 
             return response({
                 statusCode: 200,
@@ -104,17 +92,14 @@ export default class UserController {
         } catch (error) {
             return response(Boom.badRequest(error));
         }
-    }
+    };
 
-    public static async deleteById(
-        request: Hapi.Request,
-        response: Hapi.ReplyNoContinue,
-    ): Promise<any> {
+    public deleteById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            UserController.repository.delete(id);
+            this.repository.delete(id);
 
             return response({
                 statusCode: 200,
@@ -123,5 +108,7 @@ export default class UserController {
         } catch (error) {
             return response(Boom.badRequest(error));
         }
-    }
+    };
 }
+
+export default new UserController();

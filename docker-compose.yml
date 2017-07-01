@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    container_name: api-container
+    container_name: web-api
     build: .
     command: npm run nodemon:start
     volumes:

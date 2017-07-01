@@ -15,7 +15,7 @@
     "nodemon:build": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/server.ts",
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
-    "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 100 --single-quote --trailing-comma all --write 'src/**/*.ts'"
+    "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'"
   },
   "dependencies": {
     "hapi": "^16.4.3",
