@@ -5,11 +5,11 @@ export default class Repository<T> {
         this.dataSource.set(id, dataToSave);
     }
 
-    public getById(id: string) {
+    public getById(id: string): T {
         return this.dataSource.get(id);
     }
 
-    public getAll() {
+    public getAll(): T[] {
         const data = [];
 
         this.dataSource.forEach(value => data.push(value));
@@ -27,7 +27,7 @@ export default class Repository<T> {
         this.dataSource.set(id, dataToUpdate);
     }
 
-    public delete(id: string) {
+    public delete(id: string): void {
         this.dataSource.delete(id);
     }
 }
