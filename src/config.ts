@@ -2,6 +2,8 @@ export default {
     swagger: {
         options: {
             basePath: '/api/',
+            documentationPath: '/docs',
+            jsonEditor: true,
             info: {
                 title: 'API Documentation',
                 version: 'v1.0.0',
@@ -15,6 +17,7 @@ export default {
         },
     },
     status: {
+        path: '/status',
         options: {
             title: 'API Monitor',
             routeConfig: {

@@ -1,7 +1,7 @@
 import * as Hapi from 'hapi';
 
-import Config from './config';
-import Logger from './helper/logger';
+import Config from '../config';
+import Logger from '../helper/logger';
 
 export default class Plugins {
     public static async status(server: Hapi.Server): Promise<Error | any> {
@@ -9,7 +9,7 @@ export default class Plugins {
             Logger.info('Plugins - Registering status-monitor');
 
             await Plugins.register(server, {
-                path: '/status',
+                path: Config.status.path,
                 options: Config.status.options,
                 register: require('hapijs-status-monitor'),
             });
@@ -35,9 +35,9 @@ export default class Plugins {
         }
     }
 
-    private static register(server: Hapi.Server, config: any): Promise<Error | any> {
+    private static register(server: Hapi.Server, plugin: any): Promise<Error | any> {
         return new Promise((resolve, reject) => {
-            server.register(config, error => {
+            server.register(plugin, error => {
                 if (error) {
                     reject(error);
                 }

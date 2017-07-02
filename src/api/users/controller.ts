@@ -8,7 +8,9 @@ import Repository from '../../repository';
 import ICrudController from '../../helper/controller';
 
 class UserController implements ICrudController {
-    public repository: Repository<User> = new Repository<User>();
+    public repositories: any = {
+        user: new Repository<User>(),
+    };
 
     public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
@@ -16,16 +18,16 @@ class UserController implements ICrudController {
 
             const user = new User();
 
-            user.age = request.payload.age;
-            user.name = request.payload.name;
-            user.lastName = request.payload.last_name;
+            user.age = request.payload['age'];
+            user.name = request.payload['name'];
+            user.lastName = request.payload['last_name'];
 
-            const data = await this.repository.save(user);
+            const data = await this.repositories.user.save(user);
 
             return response({
                 statusCode: 200,
                 data: {
-                    id: data._id,
+                    id: data['_id'],
                 },
             });
         } catch (error) {
@@ -38,17 +40,17 @@ class UserController implements ICrudController {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = await this.repository.getById(id);
+            const user = await this.repositories.user.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
             }
 
-            user.age = request.payload.age;
-            user.name = request.payload.name;
-            user.lastName = request.payload.last_name;
+            user.age = request.payload['age'];
+            user.name = request.payload['name'];
+            user.lastName = request.payload['last_name'];
 
-            await this.repository.updateById(id, user);
+            await this.repositories.user.updateById(id, user);
 
             return response({
                 statusCode: 200,
@@ -64,7 +66,7 @@ class UserController implements ICrudController {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            const user = await this.repository.getById(id);
+            const user = await this.repositories.user.getById(id);
 
             if (!user) {
                 return response(Boom.notFound('User not found'));
@@ -83,7 +85,7 @@ class UserController implements ICrudController {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
-            const users = await this.repository.getAll();
+            const users = await this.repositories.user.getAll();
 
             return response({
                 statusCode: 200,
@@ -99,7 +101,7 @@ class UserController implements ICrudController {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 
             const id = encodeURIComponent(request.params.id);
-            await this.repository.delete(id);
+            await this.repositories.user.delete(id);
 
             return response({
                 statusCode: 200,

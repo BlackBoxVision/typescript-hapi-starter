@@ -7,11 +7,12 @@
     "rules": {
         "object-literal-key-quotes": false,
         "object-literal-sort-keys": false,
+        "no-string-literal": false,
         "ordered-imports": false,
+        "variable-name": false,
         "arrow-parens": false,
         "quotemark": false,
-        "semicolon": false,
-        "variable-name": false
+        "semicolon": false
     },
     "rulesDirectory": []
 }

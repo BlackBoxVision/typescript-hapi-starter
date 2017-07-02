@@ -1,7 +1,7 @@
 import * as Hapi from 'hapi';
 
 import Logger from './helper/logger';
-import Plugins from './plugins';
+import Plugins from './plugin';
 import Router from './router';
 
 class Server {
