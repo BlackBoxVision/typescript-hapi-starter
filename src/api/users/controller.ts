@@ -7,7 +7,7 @@ import Logger from '../../helper/logger';
 import Repository from '../../repository';
 import ICrudController from '../../helper/controller';
 
-class UserController implements ICrudController {
+export default class UserController implements ICrudController {
     public repositories: any = {
         user: new Repository<User>(),
     };
@@ -112,5 +112,3 @@ class UserController implements ICrudController {
         }
     };
 }
-
-export default new UserController();

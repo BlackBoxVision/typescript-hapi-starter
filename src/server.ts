@@ -21,7 +21,7 @@ class Server {
                 await Plugins.swagger(server);
             }
 
-            Router.register(server);
+            await Router.init(server);
 
             await server.start();
 
