@@ -37,7 +37,7 @@ export default class Plugins {
 
     private static register(server: Hapi.Server, config: any): Promise<Error | any> {
         return new Promise((resolve, reject) => {
-            server.register(config, (error) => {
+            server.register(config, error => {
                 if (error) {
                     reject(error);
                 }
