@@ -17,17 +17,17 @@ class Server {
             });
 
             if (process.env.NODE_ENV === 'development') {
-                Plugins.status(server);
-                Plugins.swagger(server);
+                await Plugins.status(server);
+                await Plugins.swagger(server);
             }
 
             Router.register(server);
 
             await server.start();
 
-            Logger.info(`Server is up and running`);
+            Logger.info(`Server - Up and running!`);
         } catch (error) {
-            Logger.info(`There was something wrong: ${error}`);
+            Logger.info(`Server - There was something wrong: ${error}`);
         }
     }
 }
