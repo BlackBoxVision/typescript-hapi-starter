@@ -5,8 +5,9 @@ import User from '../../model/user';
 import Utils from '../../helper/utils';
 import Logger from '../../helper/logger';
 import Repository from '../../repository';
+import ICrudController from '../../helper/controller';
 
-class UserController {
+class UserController implements ICrudController {
     public repository: Repository<User> = new Repository<User>();
 
     public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {

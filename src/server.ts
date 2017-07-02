@@ -7,7 +7,9 @@ import Router from './router';
 class Server {
     public static async init(): Promise<any> {
         try {
-            const server = new Hapi.Server();
+            // Cast to Hapi.Server to prevent function like connection/start to not be recognized
+            // This seems to be due to non updated type definitions
+            const server = new Hapi.Server() as Hapi.Server;
 
             server.connection({
                 host: process.env.HOST,
