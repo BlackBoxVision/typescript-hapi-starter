@@ -15,7 +15,9 @@
     "nodemon:build": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/server.ts",
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
-    "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'"
+    "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "hapi": "^16.4.3",
@@ -27,7 +29,8 @@
     "nedb": "^1.8.0",
     "vision": "^4.1.1",
     "winston": "^2.3.1",
-    "winston-daily-rotate-file": "^1.4.6"
+    "winston-daily-rotate-file": "^1.4.6",
+    "snyk": "^1.36.2"
   },
   "devDependencies": {
     "@types/hapi": "^16.1.6",
@@ -53,5 +56,6 @@
     "nodejs",
     "hapi",
     "typescript"
-  ]
+  ],
+  "snyk": true
 }
