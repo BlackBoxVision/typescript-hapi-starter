@@ -1,5 +1,4 @@
 import * as Hapi from 'hapi';
-import * as Boom from 'boom';
 
 import User from '../../model/user';
 import Utils from '../../helper/utils';
@@ -12,7 +11,7 @@ class UserController implements ICrudController {
         user: new Repository<User>(),
     };
 
-    public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
+    public create = async (request: Hapi.Request, response: any): Promise<any> => {
         try {
             Logger.info(`POST - ${Utils.getUrl(request)}`);
 
@@ -31,11 +30,11 @@ class UserController implements ICrudController {
                 },
             });
         } catch (error) {
-            return response(Boom.badRequest(error));
+            return response.badRequest(error);
         }
     };
 
-    public updateById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
+    public updateById = async (request: Hapi.Request, response: any): Promise<any> => {
         try {
             Logger.info(`PUT - ${Utils.getUrl(request)}`);
 
@@ -43,7 +42,7 @@ class UserController implements ICrudController {
             const user = await this.repositories.user.getById(id);
 
             if (!user) {
-                return response(Boom.notFound('User not found'));
+                return response.notFound('User not found');
             }
 
             user.age = request.payload['age'];
@@ -57,11 +56,11 @@ class UserController implements ICrudController {
                 data: user,
             });
         } catch (error) {
-            return response(Boom.badRequest(error));
+            return response.badRequest(error);
         }
     };
 
-    public getById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
+    public getById = async (request: Hapi.Request, response: any): Promise<any> => {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -69,7 +68,7 @@ class UserController implements ICrudController {
             const user = await this.repositories.user.getById(id);
 
             if (!user) {
-                return response(Boom.notFound('User not found'));
+                return response.notFound('User not found');
             }
 
             return response({
@@ -77,11 +76,11 @@ class UserController implements ICrudController {
                 data: user,
             });
         } catch (error) {
-            return response(Boom.notFound(error));
+            return response.notFound(error);
         }
     };
 
-    public getAll = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
+    public getAll = async (request: Hapi.Request, response: any): Promise<any> => {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
@@ -92,11 +91,11 @@ class UserController implements ICrudController {
                 data: users,
             });
         } catch (error) {
-            return response(Boom.badRequest(error));
+            return response.badRequest(error);
         }
     };
 
-    public deleteById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
+    public deleteById = async (request: Hapi.Request, response: any): Promise<any> => {
         try {
             Logger.info(`DELETE - ${Utils.getUrl(request)}`);
 
@@ -108,7 +107,7 @@ class UserController implements ICrudController {
                 data: { id },
             });
         } catch (error) {
-            return response(Boom.badRequest(error));
+            return response.badRequest(error);
         }
     };
 }

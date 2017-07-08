@@ -35,6 +35,27 @@ export default class Plugins {
         }
     }
 
+    public static async boom(server: Hapi.Server): Promise<Error | any> {
+        try {
+            Logger.info('Plugins - Registering hapi-boom-decorators');
+
+            await Plugins.register(server, {
+                register: require('hapi-boom-decorators'),
+            });
+        } catch (error) {
+            Logger.info(`Plugins - Ups, something went wrong when registering hapi-boom-decorators plugin: ${error}`);
+        }
+    }
+
+    public static async all(server: Hapi.Server): Promise<Error | any> {
+        if (process.env.NODE_ENV === 'development') {
+            await Plugins.status(server);
+            await Plugins.swagger(server);
+        }
+
+        await Plugins.boom(server);
+    }
+
     private static register(server: Hapi.Server, plugin: any): Promise<Error | any> {
         return new Promise((resolve, reject) => {
             server.register(plugin, error => {

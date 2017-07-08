@@ -16,11 +16,7 @@ class Server {
                 port: process.env.PORT,
             });
 
-            if (process.env.NODE_ENV === 'development') {
-                await Plugins.status(server);
-                await Plugins.swagger(server);
-            }
-
+            await Plugins.all(server);
             await Router.init(server);
 
             await server.start();

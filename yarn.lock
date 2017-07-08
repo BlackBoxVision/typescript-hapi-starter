@@ -280,17 +280,17 @@ boom@^4.0.0, boom@4.x.x:
   dependencies:
     hoek "4.x.x"
 
+boom@^5.1.0, boom@5.x.x:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/boom/-/boom-5.1.0.tgz#0308fa8e924cd6d42d9c3bf4883bdc98f0e71df8"
+  dependencies:
+    hoek "4.x.x"
+
 boom@2.x.x:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
-
-boom@5.x.x:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/boom/-/boom-5.1.0.tgz#0308fa8e924cd6d42d9c3bf4883bdc98f0e71df8"
-  dependencies:
-    hoek "4.x.x"
 
 brace-expansion@^1.1.7:
   version "1.1.8"
@@ -868,6 +868,12 @@ hapi:
     statehood "5.x.x"
     subtext "4.x.x"
     topo "2.x.x"
+
+hapi-boom-decorators:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hapi-boom-decorators/-/hapi-boom-decorators-3.0.0.tgz#d8cb0fe64295908f974983726c936a9d4158bfef"
+  dependencies:
+    boom "^5.1.0"
 
 hapi-swagger:
   version "7.7.0"
