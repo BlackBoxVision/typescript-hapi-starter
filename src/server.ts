@@ -1,11 +1,11 @@
 import * as Hapi from 'hapi';
 
 import Logger from './helper/logger';
-import Plugins from './plugin';
+import Plugin from './plugin';
 import Router from './router';
 
-class Server {
-    public static async init(): Promise<any> {
+export default class Server {
+    public static async start(): Promise<any> {
         try {
             // Cast to Hapi.Server to prevent function like connection/start to not be recognized
             // This seems to be due to non updated type definitions
@@ -16,8 +16,8 @@ class Server {
                 port: process.env.PORT,
             });
 
-            await Plugins.all(server);
-            await Router.init(server);
+            await Plugin.registerAll(server);
+            await Router.loadRoutes(server);
 
             await server.start();
 
@@ -27,5 +27,3 @@ class Server {
         }
     }
 }
-
-export default Server.init();

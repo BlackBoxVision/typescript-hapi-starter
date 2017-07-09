@@ -12,7 +12,7 @@
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up",
     "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans",
-    "nodemon:build": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/server.ts",
+    "nodemon:build": "nodemon --exec 'node -r dotenv/config' ./node_modules/.bin/ts-node -- ./src/index.ts",
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'"
@@ -45,8 +45,8 @@
     "typestyle": "^1.3.7"
   },
   "pre-commit": [
-    "format:lint",
-    "format:prettier"
+    "format:prettier",
+    "format:lint"
   ],
   "keywords": [
     "api",
