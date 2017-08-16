@@ -22,7 +22,7 @@
     "hapi": "^16.4.3",
     "hapi-boom-decorators": "^3.0.0",
     "hapi-swagger": "^7.7.0",
-    "hapijs-status-monitor": "^0.5.0",
+    "hapijs-status-monitor": "^0.6.0",
     "inert": "^4.2.0",
     "joi": "^10.6.0",
     "nedb": "^1.8.0",

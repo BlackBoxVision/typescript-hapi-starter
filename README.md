@@ -17,7 +17,9 @@ This starter kit comes with the following features:
 
 ## How to use it? 
 
-**Fork** it, or **download** it as .zip, install the requested dependencies in package.json and then you're good to go!
+Now there's a CLI that currently support creating a new project from this repo: [create-typescript-api](https://github.com/BlackBoxVision/create-typescript-api)
+
+Other option is to **Fork** it, or **download** it as .zip file.
 
 ## TODO
 
