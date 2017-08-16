@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
+        "no-trailing-whitespace": false,
         "object-literal-key-quotes": false,
         "object-literal-sort-keys": false,
         "no-string-literal": false,
@@ -12,7 +13,17 @@
         "variable-name": false,
         "arrow-parens": false,
         "quotemark": false,
-        "semicolon": false
+        "trailing-comma": false,
+        "semicolon": [
+            true,
+            "always",
+            "ignore-interfaces",
+            "ignore-bound-class-methods"
+        ],
+        "member-ordering": [
+            true,
+            "variables-before-functions"
+        ]
     },
     "rulesDirectory": []
 }

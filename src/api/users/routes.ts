@@ -3,12 +3,13 @@ import * as Hapi from 'hapi';
 import validate from './validate';
 import IRoute from '../../helper/route';
 import Logger from '../../helper/logger';
-import controller from './controller';
+import UserController from './controller';
 
-class UserRoutes implements IRoute {
+export default class UserRoutes implements IRoute {
     public async register(server: Hapi.Server): Promise<any> {
         return new Promise(resolve => {
             Logger.info('UserRoutes - Start adding user routes.');
+            const controller = new UserController();
 
             server.route([
                 {
@@ -73,5 +74,3 @@ class UserRoutes implements IRoute {
         });
     }
 }
-
-export default new UserRoutes();

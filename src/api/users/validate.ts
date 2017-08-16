@@ -5,7 +5,7 @@ export default {
         payload: {
             age: Joi.number().integer().required(),
             name: Joi.string().required(),
-            last_name: Joi.string().required(),
+            lastName: Joi.string().required(),
         },
     },
     updateById: {
@@ -15,7 +15,7 @@ export default {
         payload: {
             age: Joi.number().integer().optional(),
             name: Joi.string().optional(),
-            last_name: Joi.string().optional(),
+            lastName: Joi.string().optional(),
         },
     },
     getById: {

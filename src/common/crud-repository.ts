@@ -41,19 +41,19 @@ export default class Repository<T> {
         });
     }
 
-    public updateById(_id: string, data: T): Promise<void> {
+    public updateById(_id: string, data: T): Promise<T> {
         return new Promise((resolve, reject) => {
             this.dataSource.update({ _id }, data, undefined, error => {
                 if (error) {
                     reject(error);
                 }
 
-                resolve();
+                this.getById(_id).then(value => resolve(value));
             });
         });
     }
 
-    public delete(_id: string): Promise<string> {
+    public deleteById(_id: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.dataSource.remove({ _id }, error => {
                 if (error) {
