@@ -1,6 +1,6 @@
-import Repository from './crud-repository';
+import Repository from './base-repository';
 
-class CrudService<T> {
+export default class CrudResolver<T> {
     constructor(protected repository: Repository<T>) {}
 
     public async save(data: T): Promise<T> {
@@ -31,5 +31,3 @@ class CrudService<T> {
         return await Promise.all(ids.map(async id => await this.deleteOneById(id)));
     }
 }
-
-export default CrudService;

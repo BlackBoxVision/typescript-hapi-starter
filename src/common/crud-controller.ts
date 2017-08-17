@@ -3,16 +3,16 @@ import * as Boom from 'boom';
 
 import Utils from '../helper/utils';
 import Logger from '../helper/logger';
-import CrudService from '../common/crud-service';
+import CrudResolver from '../common/base-resolver';
 
 export default class CrudController<T> {
-    constructor(private crudService: CrudService<T>) {}
+    constructor(private crudResolver: CrudResolver<T>) {}
 
     public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
             Logger.info(`POST - ${Utils.getUrl(request)}`);
 
-            const data: any = await this.crudService.save(request.payload);
+            const data: any = await this.crudResolver.save(request.payload);
 
             return response({
                 statusCode: 200,
@@ -31,7 +31,7 @@ export default class CrudController<T> {
 
             const id = encodeURIComponent(request.params.id);
 
-            const entity: T = await this.crudService.updateOneById(id, request.payload);
+            const entity: T = await this.crudResolver.updateOneById(id, request.payload);
 
             return response({
                 statusCode: 200,
@@ -48,7 +48,7 @@ export default class CrudController<T> {
 
             const id = encodeURIComponent(request.params.id);
 
-            const entity: T = await this.crudService.getOneById(id);
+            const entity: T = await this.crudResolver.getOneById(id);
 
             return response({
                 statusCode: 200,
@@ -63,7 +63,7 @@ export default class CrudController<T> {
         try {
             Logger.info(`GET - ${Utils.getUrl(request)}`);
 
-            const entities: T[] = await this.crudService.getAll();
+            const entities: T[] = await this.crudResolver.getAll();
 
             return response({
                 statusCode: 200,
@@ -80,7 +80,7 @@ export default class CrudController<T> {
 
             const id = encodeURIComponent(request.params.id);
 
-            await this.crudService.deleteOneById(id);
+            await this.crudResolver.deleteOneById(id);
 
             return response({
                 statusCode: 200,
@@ -106,7 +106,7 @@ export default class CrudController<T> {
                 }
             }
 
-            const entities: any[] = await this.crudService.bulkUpdate(ids, field, value);
+            const entities: any[] = await this.crudResolver.bulkUpdate(ids, field, value);
 
             return response({
                 statusCode: 200,
@@ -123,7 +123,7 @@ export default class CrudController<T> {
 
             const ids: string[] = request.payload.ids as string[];
 
-            const entities: T[] = await this.crudService.bulkDelete(ids);
+            const entities: T[] = await this.crudResolver.bulkDelete(ids);
 
             if (!entities) {
                 return response(Boom.notFound('Items not found.'));
