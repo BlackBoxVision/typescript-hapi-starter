@@ -2,7 +2,7 @@ import * as DataStore from 'nedb';
 
 export default class Repository<T> {
     public dataSource = new DataStore({
-        inMemoryOnly: true
+        inMemoryOnly: true,
     });
 
     public save(data: T): Promise<T> {
