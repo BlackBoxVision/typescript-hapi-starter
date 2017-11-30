@@ -16,9 +16,7 @@
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
-    "test": "lab --sourcemaps --transform node_modules/lab-transform-typescript -c -o index.html -r html",
-    "test:tape": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec; nyc report ---reporter=text",
-    "test:coverage": "lab --transform node_modules/lab-transform-typescript -r html -o ./coverage/index.html && open ./coverage/index.html"
+    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec"
   },
   "nyc": {
     "include": [
