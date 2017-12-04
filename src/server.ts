@@ -1,4 +1,3 @@
-import { objectify } from 'tslint/lib/utils';
 import * as Hapi from 'hapi';
 import * as DotEnv from 'dotenv';
 
@@ -11,8 +10,6 @@ export default class Server {
 
     public static async start(): Promise<Hapi.Server> {
         try {
-            // Cast to Hapi.Server to prevent function like connection/start to not be recognized
-            // This seems to be due to non updated type definitions
             DotEnv.config({
                 path: `${process.cwd()}/.env`,
             });
