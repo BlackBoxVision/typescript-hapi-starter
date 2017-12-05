@@ -1,29 +1,58 @@
 import * as Hapi from 'hapi';
+import * as DotEnv from 'dotenv';
 
 import Logger from './helper/logger';
 import Plugin from './plugin';
 import Router from './router';
 
 export default class Server {
-    public static async start(): Promise<any> {
-        try {
-            // Cast to Hapi.Server to prevent function like connection/start to not be recognized
-            // This seems to be due to non updated type definitions
-            const server = new Hapi.Server() as Hapi.Server;
+    private static _instance: Hapi.Server;
 
-            server.connection({
+    public static async start(): Promise<Hapi.Server> {
+        try {
+            DotEnv.config({
+                path: `${process.cwd()}/.env`,
+            });
+
+            Server._instance = new Hapi.Server();
+
+            Server._instance.connection({
                 host: process.env.HOST,
                 port: process.env.PORT,
             });
 
-            await Plugin.registerAll(server);
-            await Router.loadRoutes(server);
+            await Plugin.registerAll(Server._instance);
+            await Router.loadRoutes(Server._instance);
 
-            await server.start();
+            await Server._instance.start();
 
             Logger.info(`Server - Up and running!`);
+
+            return Server._instance;
         } catch (error) {
             Logger.info(`Server - There was something wrong: ${error}`);
+
+            throw error;
         }
+    }
+
+    public static stop(): Promise<Error | null> {
+        Logger.info(`Server - Stopping!`);
+
+        return Server._instance.stop();
+    }
+
+    public static async recycle(): Promise<Hapi.Server> {
+        await Server.stop();
+
+        return await Server.start();
+    }
+
+    public static instance(): Hapi.Server {
+        return Server._instance;
+    }
+
+    public static async inject(options: string | Hapi.InjectedRequestOptions): Promise<Hapi.InjectedResponseObject> {
+        return await Server._instance.inject(options);
     }
 }
