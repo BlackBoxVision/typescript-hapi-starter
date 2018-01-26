@@ -4,3 +4,5 @@ dist
 logs/*.log
 .nyc_output/
 coverage/
+
+*.db

@@ -1,13 +1,31 @@
-import * as DataStore from 'nedb';
+import { injectable } from 'inversify';
+import { INedbDatastore, IRepository } from '../interfaces';
 
-export default class Repository<T> {
-    public dataSource = new DataStore({
-        inMemoryOnly: true,
-    });
+@injectable()
+export default class BaseNedbRepository<T> implements IRepository<T> {
+    /**
+     * Datasource
+     */
+    protected dataSource: INedbDatastore;
 
+    /**
+     * BaseNedbRepository Constructor
+     *
+     * @param {INedbDatastore} datastore
+     */
+    public constructor(datastore: INedbDatastore) {
+        this.dataSource = datastore;
+    }
+
+    /**
+     * Save an entity
+     *
+     * @param {T} data
+     * @returns {Promise<T>}
+     */
     public save(data: T): Promise<T> {
         return new Promise((resolve, reject) => {
-            this.dataSource.insert(data, (error, document) => {
+            this.dataSource.insert<T>(data, (error, document) => {
                 if (error) {
                     reject(error);
                 }
@@ -17,9 +35,15 @@ export default class Repository<T> {
         });
     }
 
-    public getById(_id: string): Promise<any> {
+    /**
+     * Get entity by ID
+     *
+     * @param {string} _id
+     * @returns {Promise<T>}
+     */
+    public getById(_id: string): Promise<T> {
         return new Promise((resolve, reject) => {
-            this.dataSource.findOne({ _id }, (error, document) => {
+            this.dataSource.findOne<T>({ _id }, (error, document) => {
                 if (error) {
                     reject(error);
                 }
@@ -29,9 +53,14 @@ export default class Repository<T> {
         });
     }
 
-    public getAll(): Promise<any[]> {
+    /**
+     * Get all entities
+     *
+     * @returns {Promise<T[]>}
+     */
+    public getAll(): Promise<T[]> {
         return new Promise((resolve, reject) => {
-            this.dataSource.find({}, {}, (error, documents) => {
+            this.dataSource.find<T>({}, (error, documents) => {
                 if (error) {
                     reject(error);
                 }
@@ -41,6 +70,13 @@ export default class Repository<T> {
         });
     }
 
+    /**
+     * Update entity by ID
+     *
+     * @param {string} _id
+     * @param {T} data
+     * @returns {Promise<T>}
+     */
     public updateById(_id: string, data: T): Promise<T> {
         return new Promise((resolve, reject) => {
             this.dataSource.update({ _id }, data, undefined, error => {
@@ -53,6 +89,12 @@ export default class Repository<T> {
         });
     }
 
+    /**
+     * Delete entity by ID
+     *
+     * @param {string} _id
+     * @returns {Promise<string>}
+     */
     public deleteById(_id: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.dataSource.remove({ _id }, error => {

@@ -1,34 +1,55 @@
-import * as Hapi from 'hapi';
 import * as Boom from 'boom';
+import * as Hapi from 'hapi';
+import { injectable } from 'inversify';
+import { ICrudController, IResolver } from '../interfaces';
 
-import Utils from '../helper/utils';
-import Logger from '../helper/logger';
-import CrudResolver from '../common/base-resolver';
+@injectable()
+export default class CrudController<T> implements ICrudController {
+    /**
+     * Resolver Instance
+     */
+    protected crudResolver: IResolver<T>;
 
-export default class CrudController<T> {
-    constructor(private crudResolver: CrudResolver<T>) {}
+    /**
+     * Crud Controller constructor
+     *
+     * @param {IResolver<T>} crudResolver
+     */
+    constructor(crudResolver: IResolver<T>) {
+        this.crudResolver = crudResolver;
+    }
 
+    /**
+     * Create
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public create = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`POST - ${Utils.getUrl(request)}`);
-
             const data: any = await this.crudResolver.save(request.payload);
 
             return response({
-                statusCode: 200,
+                statusCode: 201,
                 data: {
                     id: data['_id'],
                 },
-            });
+            }).code(201);
         } catch (error) {
             return response(Boom.badImplementation(error));
         }
     };
 
+    /**
+     * Update By ID
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public updateById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`PUT - ${Utils.getUrl(request)}`);
-
             const id = encodeURIComponent(request.params.id);
 
             const entity: T = await this.crudResolver.updateOneById(id, request.payload);
@@ -42,10 +63,15 @@ export default class CrudController<T> {
         }
     };
 
+    /**
+     * Get By ID
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public getById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`GET - ${Utils.getUrl(request)}`);
-
             const id = encodeURIComponent(request.params.id);
 
             const entity: T = await this.crudResolver.getOneById(id);
@@ -59,10 +85,15 @@ export default class CrudController<T> {
         }
     };
 
+    /**
+     * Get All
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public getAll = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`GET - ${Utils.getUrl(request)}`);
-
             const entities: T[] = await this.crudResolver.getAll();
 
             return response({
@@ -74,10 +105,15 @@ export default class CrudController<T> {
         }
     };
 
+    /**
+     * Delete By ID
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public deleteById = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`DELETE - ${Utils.getUrl(request)}`);
-
             const id = encodeURIComponent(request.params.id);
 
             await this.crudResolver.deleteOneById(id);
@@ -91,10 +127,15 @@ export default class CrudController<T> {
         }
     };
 
+    /**
+     * Bulk Update
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public bulkUpdate = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`GET - ${Utils.getUrl(request)}`);
-
             const ids: string[] = request.payload.ids as string[];
             let field: string = '';
             let value: string = '';
@@ -117,13 +158,18 @@ export default class CrudController<T> {
         }
     };
 
+    /**
+     * Bulk Delete
+     *
+     * @param {Request} request
+     * @param {ReplyNoContinue} response
+     * @returns {Promise<any>}
+     */
     public bulkDelete = async (request: Hapi.Request, response: Hapi.ReplyNoContinue): Promise<any> => {
         try {
-            Logger.info(`GET - ${Utils.getUrl(request)}`);
-
             const ids: string[] = request.payload.ids as string[];
 
-            const entities: T[] = await this.crudResolver.bulkDelete(ids);
+            const entities: string[] = await this.crudResolver.bulkDelete(ids);
 
             if (!entities) {
                 return response(Boom.notFound('Items not found.'));

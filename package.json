@@ -16,7 +16,7 @@
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
-    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec"
+    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register --require reflect-metadata tape test/**/*.spec.{ts,js} | tap-spec"
   },
   "nyc": {
     "include": [
@@ -27,13 +27,17 @@
     ]
   },
   "dependencies": {
+    "good": "^7.3.0",
+    "good-winston": "^4.0.0",
     "hapi": "^16.5.2",
     "hapi-boom-decorators": "^3.0.0",
     "hapi-swagger": "^7.7.0",
     "hapijs-status-monitor": "^0.6.0",
     "inert": "^4.2.1",
+    "inversify": "^4.6.0",
     "joi": "^10.6.0",
     "nedb": "^1.8.0",
+    "reflect-metadata": "^0.1.10",
     "vision": "^4.1.1",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6"
@@ -42,9 +46,11 @@
     "@types/code": "^4.0.3",
     "@types/dotenv": "^4.0.2",
     "@types/hapi": "^16.1.6",
+    "@types/inversify": "^2.0.33",
     "@types/joi": "^10.4.0",
     "@types/nedb": "^1.8.3",
     "@types/node": "^8.0.6",
+    "@types/reflect-metadata": "^0.0.5",
     "@types/tape": "^4.2.31",
     "@types/winston": "^2.3.3",
     "dotenv": "^4.0.0",

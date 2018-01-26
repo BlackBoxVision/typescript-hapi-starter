@@ -1,4 +1,5 @@
-export default {
+import * as path from 'path';
+const config = {
     swagger: {
         options: {
             basePath: '/api/',
@@ -25,4 +26,18 @@ export default {
             },
         },
     },
+    datastore: {
+        nedb: {
+            users: {
+                // inMemoryOnly: true,
+                filename: path.join(process.cwd(), `storage/nedb/${process.env.NODE_ENV}/users.db`),
+            },
+            articles: {
+                // inMemoryOnly: true,
+                filename: path.join(process.cwd(), `storage/nedb/${process.env.NODE_ENV}/articles.db`),
+            },
+        },
+    },
 };
+
+export default config;

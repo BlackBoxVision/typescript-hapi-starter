@@ -1,7 +1,13 @@
-import Repository from './base-repository';
+import { injectable } from 'inversify';
+import { IRepository, IResolver, IUser } from '../interfaces';
 
-export default class CrudResolver<T> {
-    constructor(protected repository: Repository<T>) {}
+@injectable()
+export default class CrudResolver<T> implements IResolver<T> {
+    protected repository: IRepository<T>;
+
+    constructor(repository: IRepository<T>) {
+        this.repository = repository;
+    }
 
     public async save(data: T): Promise<T> {
         return await this.repository.save(data);
@@ -15,7 +21,7 @@ export default class CrudResolver<T> {
         return await this.repository.updateById(id, update);
     }
 
-    public async deleteOneById(id: string): Promise<any> {
+    public async deleteOneById(id: string): Promise<string> {
         return await this.repository.deleteById(id);
     }
 
@@ -27,7 +33,7 @@ export default class CrudResolver<T> {
         return await Promise.all(ids.map(async id => await this.updateOneById(id, { [field]: value })));
     }
 
-    public async bulkDelete(ids: string[]): Promise<T[]> {
+    public async bulkDelete(ids: string[]): Promise<string[]> {
         return await Promise.all(ids.map(async id => await this.deleteOneById(id)));
     }
 }
