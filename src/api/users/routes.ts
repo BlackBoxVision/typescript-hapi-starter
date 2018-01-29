@@ -1,14 +1,14 @@
 import { inject, injectable } from 'inversify';
-import BaseRouter from '../../common/base-router';
-import { ICrudController, IRouteConfiguration } from '../../interfaces';
-import Types from '../../ioc/types';
-import validate from './validate';
+import BaseRouter from 'app/common/base-router';
+import { IRouteConfiguration, IUsersController } from 'app/interfaces';
+import Types from 'app/ioc/types';
+import validate from 'app/api/users/validate';
 
 @injectable()
 export default class UserRoutes extends BaseRouter {
-    private controller: ICrudController;
+    private controller: IUsersController;
 
-    constructor(@inject(Types.Controllers.UsersController) controller: ICrudController) {
+    constructor(@inject(Types.Controllers.UsersController) controller: IUsersController) {
         super();
 
         this.controller = controller;

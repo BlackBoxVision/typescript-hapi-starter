@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
-import { IRepository, IResolver, IUser } from '../interfaces';
+import { IRepository, IResolver } from 'app/interfaces';
 
 @injectable()
-export default class CrudResolver<T> implements IResolver<T> {
-    protected repository: IRepository<T>;
+export default class CrudResolver<T, PKeyType = string> implements IResolver<T, PKeyType> {
+    protected repository: IRepository<T, PKeyType>;
 
-    constructor(repository: IRepository<T>) {
+    constructor(repository: IRepository<T, PKeyType>) {
         this.repository = repository;
     }
 
@@ -13,15 +13,15 @@ export default class CrudResolver<T> implements IResolver<T> {
         return await this.repository.save(data);
     }
 
-    public async getOneById(id: string): Promise<T> {
+    public async getOneById(id: PKeyType): Promise<T> {
         return await this.repository.getById(id);
     }
 
-    public async updateOneById(id: string, update: any): Promise<T> {
+    public async updateOneById(id: PKeyType, update: any): Promise<T> {
         return await this.repository.updateById(id, update);
     }
 
-    public async deleteOneById(id: string): Promise<string> {
+    public async deleteOneById(id: PKeyType): Promise<PKeyType> {
         return await this.repository.deleteById(id);
     }
 
@@ -29,11 +29,11 @@ export default class CrudResolver<T> implements IResolver<T> {
         return await this.repository.getAll();
     }
 
-    public async bulkUpdate(ids: string[], field: string, value: string): Promise<T[]> {
+    public async bulkUpdate(ids: PKeyType[], field: string, value: string): Promise<T[]> {
         return await Promise.all(ids.map(async id => await this.updateOneById(id, { [field]: value })));
     }
 
-    public async bulkDelete(ids: string[]): Promise<string[]> {
+    public async bulkDelete(ids: PKeyType[]): Promise<PKeyType[]> {
         return await Promise.all(ids.map(async id => await this.deleteOneById(id)));
     }
 }

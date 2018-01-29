@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
-import { ILogger, IRouteConfiguration, IServer, IServerRegisterable } from '../interfaces';
-import Types from '../ioc/types';
+import { ILogger, IRouteConfiguration, IServer, IServerRegisterable } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
 @injectable()
 abstract class BaseRouter implements IServerRegisterable {

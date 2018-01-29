@@ -1,10 +1,10 @@
 import { interfaces } from 'inversify';
-import ArticlesController from '../api/articles/controller';
-import UsersController from '../api/users/controller';
-import { ICrudController } from '../interfaces';
+import ArticlesController from 'app/api/articles/controller';
+import UsersController from 'app/api/users/controller';
+import { IArticlesController, IUsersController } from 'app/interfaces';
 import Types from './types';
 
 export default (c: interfaces.Container): void => {
-    c.bind<ICrudController>(Types.Controllers.UsersController).to(UsersController);
-    c.bind<ICrudController>(Types.Controllers.ArticlesController).to(ArticlesController);
+    c.bind<IUsersController>(Types.Controllers.UsersController).to(UsersController);
+    c.bind<IArticlesController>(Types.Controllers.ArticlesController).to(ArticlesController);
 };

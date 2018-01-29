@@ -1,15 +1,10 @@
-import { NedbDataStoreTypes } from "../src/ioc/datastore";
-import { serverTest, extractPayload, insertRecords, nedbGetStore, clearDB, TestCallbackFunc } from './helpers';
-
-interface IUser {
-    id?: string;
-    age: number;
-    name: string;
-    lastName: string;
-}
+import { IUser } from "app/interfaces";
+import { serverTest, extractPayload, TestCallbackFunc } from 'test/helpers';
+import { insertRecords, getStore, clearDB } from 'test/helpers/nedb'
+import { DataStores } from 'app/ioc/types'
 
 const cleanup: TestCallbackFunc = (container, server) => {
-    const store = nedbGetStore(NedbDataStoreTypes.USERS);
+    const store = getStore(DataStores.NedbUserDataStore);
     clearDB(store);
 };
 
@@ -26,7 +21,7 @@ serverTest('[GET] /api/users should return 200 status', async (server, t) => {
 }, cleanup, cleanup);
 
 serverTest('[GET] /api/users should return a list of users', async (server, t) => {
-    const store = nedbGetStore(NedbDataStoreTypes.USERS);
+    const store = getStore(DataStores.NedbUserDataStore);
 
     await insertRecords<IUser[]>([{
         name: 'John',
@@ -63,8 +58,8 @@ serverTest('[POST] /api/users should return 201', async (server, t) => {
     const payload = extractPayload<IUser>(response);
 
     t.equal(response.statusCode, 201, 'Status is 201');
-    t.assert(typeof payload.data.id === 'string', 'ID is a string');
+    t.assert(typeof payload.data._id === 'string', 'ID is a string');
 
-    const store = nedbGetStore(NedbDataStoreTypes.USERS);
+    const store = getStore(DataStores.NedbUserDataStore);
     clearDB(store);
 }, cleanup, cleanup);

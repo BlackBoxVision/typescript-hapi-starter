@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
-import Config from '../config';
-import { IConfig, ILogger, IServer, IServerRegisterable } from '../interfaces';
-import Types from '../ioc/types';
+import { IConfig, ILogger, IServer, IServerRegisterable } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
 @injectable()
 export default abstract class BasePlugin implements IServerRegisterable {

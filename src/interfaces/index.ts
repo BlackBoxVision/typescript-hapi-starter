@@ -1,6 +1,6 @@
 import * as Hapi from 'hapi';
 import * as Nedb from 'nedb';
-import Config from '../config';
+import Config from 'app/config';
 
 /**
  * 1. Generic Interfaces
@@ -25,6 +25,11 @@ export interface IRouteConfiguration extends Hapi.RouteConfiguration {}
 export interface IServer extends Hapi.Server {}
 
 export type INedbDatastore = Nedb;
+
+export interface IPayload<T> {
+    status: number;
+    data: T;
+}
 
 /**
  * 2. Services
@@ -60,38 +65,38 @@ export interface IArticle {
 /**
  * 4. Repositories
  */
-export interface IRepository<T> {
-    save: (data: T) => Promise<T>;
-    getById: (_id: string) => Promise<T>;
-    getAll: () => Promise<T[]>;
-    updateById: (_id: string, data: T) => Promise<T>;
-    deleteById: (_id: string) => Promise<string>;
+export interface IRepository<EntityType, PKeyType = string> {
+    save: (data: EntityType) => Promise<EntityType>;
+    getById: (_id: PKeyType) => Promise<EntityType>;
+    getAll: () => Promise<EntityType[]>;
+    updateById: (_id: PKeyType, data: EntityType) => Promise<EntityType>;
+    deleteById: (_id: PKeyType) => Promise<PKeyType>;
 }
 
-export interface IUserRepository extends IRepository<IUser> {}
-export interface IArticleRepository extends IRepository<IArticle> {}
+export interface IUserRepository extends IRepository<IUser, string> {}
+export interface IArticleRepository extends IRepository<IArticle, string> {}
 
 /**
  * 5. Resolvers
  */
-export interface IResolver<T> {
+export interface IResolver<T, PKeyType = string> {
     save: (data: T) => Promise<T>;
-    getOneById: (id: string) => Promise<T>;
-    updateOneById: (id: string, update: any) => Promise<T>;
-    deleteOneById: (id: string) => Promise<string>;
+    getOneById: (id: PKeyType) => Promise<T>;
+    updateOneById: (id: PKeyType, update: any) => Promise<T>;
+    deleteOneById: (id: PKeyType) => Promise<PKeyType>;
     getAll: () => Promise<T[]>;
-    bulkUpdate: (ids: string[], field: string, value: string) => Promise<T[]>;
-    bulkDelete: (ids: string[]) => Promise<string[]>;
+    bulkUpdate: (ids: PKeyType[], field: string, value: string) => Promise<T[]>;
+    bulkDelete: (ids: PKeyType[]) => Promise<PKeyType[]>;
 }
 
-export interface IUserResolver extends IResolver<IUser> {}
-export interface IArticleResolver extends IResolver<IArticle> {}
+export interface IUserResolver extends IResolver<IUser, string> {}
+export interface IArticleResolver extends IResolver<IArticle, string> {}
 
 /**
  * 6. Controllers
  */
 
-export interface ICrudController {
+export interface ICrudController<T> {
     create: (request: Hapi.Request, response: Hapi.ReplyNoContinue) => Promise<any>;
     updateById: (request: Hapi.Request, response: Hapi.ReplyNoContinue) => Promise<any>;
     getById: (request: Hapi.Request, response: Hapi.ReplyNoContinue) => Promise<any>;
@@ -100,3 +105,6 @@ export interface ICrudController {
     bulkUpdate: (request: Hapi.Request, response: Hapi.ReplyNoContinue) => Promise<any>;
     bulkDelete: (request: Hapi.Request, response: Hapi.ReplyNoContinue) => Promise<any>;
 }
+
+export interface IUsersController extends ICrudController<IUser> {}
+export interface IArticlesController extends ICrudController<IArticle> {}

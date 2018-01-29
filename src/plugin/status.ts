@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import BasePlugin from './base-plugin';
+import BasePlugin from 'app/plugin/base-plugin';
 
 @injectable()
 class Status extends BasePlugin {

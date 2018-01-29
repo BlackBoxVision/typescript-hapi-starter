@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import BasePlugin from './base-plugin';
+import BasePlugin from 'app/plugin/base-plugin';
 import * as GoodWinston from 'good-winston';
 import * as good from 'good';
 import * as Winston from 'winston';

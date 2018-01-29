@@ -1,9 +1,9 @@
 import { inject } from 'inversify';
-import Resolver from '../../common/base-resolver';
-import { IUser, IUserRepository } from '../../interfaces';
-import Types from '../../ioc/types';
+import Resolver from 'app/common/base-resolver';
+import { IUser, IUserRepository, IUserResolver } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
-export default class UserResolver extends Resolver<IUser> {
+export default class UserResolver extends Resolver<IUser, string> implements IUserResolver {
     constructor(@inject(Types.Repositories.UserRepository) repository: IUserRepository) {
         super(repository);
     }

@@ -1,10 +1,10 @@
 import * as Boom from 'boom';
 import * as Hapi from 'hapi';
 import { injectable } from 'inversify';
-import { ICrudController, IResolver } from '../interfaces';
+import { ICrudController, IResolver } from 'app/interfaces';
 
 @injectable()
-export default class CrudController<T> implements ICrudController {
+export default class CrudController<T> implements ICrudController<T> {
     /**
      * Resolver Instance
      */
@@ -33,7 +33,7 @@ export default class CrudController<T> implements ICrudController {
             return response({
                 statusCode: 201,
                 data: {
-                    id: data['_id'],
+                    _id: data['_id'],
                 },
             }).code(201);
         } catch (error) {
@@ -120,7 +120,7 @@ export default class CrudController<T> implements ICrudController {
 
             return response({
                 statusCode: 200,
-                data: { id },
+                data: { _id: id },
             });
         } catch (error) {
             return response(Boom.badImplementation(error));

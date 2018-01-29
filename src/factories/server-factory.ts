@@ -1,7 +1,7 @@
 import * as Hapi from 'hapi';
 import { injectable, multiInject } from 'inversify';
-import { IServerRegisterable } from '../interfaces';
-import Types from '../ioc/types';
+import { IServerRegisterable } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
 /**
  * Server Factory Class

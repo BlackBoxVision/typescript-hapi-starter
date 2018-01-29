@@ -12,11 +12,11 @@
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up",
     "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans",
-    "nodemon:build": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
+    "nodemon:build": "nodemon --exec ./node_modules/.bin/ts-node --require tsconfig-paths/register -- ./src/index.ts",
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
-    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register --require reflect-metadata tape test/**/*.spec.{ts,js} | tap-spec"
+    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register --require reflect-metadata --require tsconfig-paths/register tape test/**/*.spec.{ts,js} | tap-spec"
   },
   "nyc": {
     "include": [
@@ -63,6 +63,7 @@
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0",
     "ts-node": "^3.3.0",
+    "tsconfig-paths": "^3.1.1",
     "tslint": "^5.4.3",
     "typescript": "^2.4.1",
     "typestyle": "^1.3.7"

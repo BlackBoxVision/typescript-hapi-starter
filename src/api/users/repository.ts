@@ -1,8 +1,7 @@
 import { inject, injectable, interfaces } from 'inversify';
-import Repository from '../../common/base-nedb-repository';
-import { INedbDatastore, IUser, IUserRepository } from '../../interfaces';
-import { NedbDataStoreTypes } from '../../ioc/datastore';
-import Types from '../../ioc/types';
+import Repository from 'app/common/base-nedb-repository';
+import { INedbDatastore, IUser, IUserRepository } from 'app/interfaces';
+import { DataStores } from 'app/ioc/types';
 
 @injectable()
 export default class UserRepository extends Repository<IUser> implements IUserRepository {
@@ -10,8 +9,8 @@ export default class UserRepository extends Repository<IUser> implements IUserRe
      * User BaseNedbRepository Constructor
      * @param {interfaces.Factory<INedbDatastore>} factory
      */
-    public constructor(@inject(Types.DataStores.NedbFactory) factory: interfaces.Factory<INedbDatastore>) {
-        const datastore = factory(NedbDataStoreTypes.USERS) as INedbDatastore;
+    public constructor(@inject(DataStores.NedbFactory) factory: interfaces.Factory<INedbDatastore>) {
+        const datastore = factory(DataStores.NedbUserDataStore) as INedbDatastore;
 
         super(datastore);
     }

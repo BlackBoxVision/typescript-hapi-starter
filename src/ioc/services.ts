@@ -1,9 +1,9 @@
 import 'winston-daily-rotate-file';
 import { interfaces } from 'inversify';
 import { Logger, TransportInstance, transports } from 'winston';
-import Config from '../config';
-import { IConfig, ILogger } from '../interfaces';
-import Types from './types';
+import Config from 'app/config';
+import { IConfig, ILogger } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
 export default (c: interfaces.Container): void => {
     c.bind<interfaces.Container>(Types.Services.Container).toConstantValue(c);

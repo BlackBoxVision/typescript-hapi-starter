@@ -1,52 +1,39 @@
 import { interfaces } from 'inversify';
-import { IConfig, ILogger, INedbDatastore } from '../interfaces';
-import Types from './types';
+import { IConfig, ILogger, INedbDatastore } from 'app/interfaces';
+import Types from 'app/ioc/types';
 import * as Nedb from 'nedb';
 
-export enum NedbDataStoreTypes {
-    USERS = 0x1,
-    ARTICLES = 0x2,
-}
+const nedbLoader = (name: string, options: Nedb.DataStoreOptions, logger: ILogger) => {
+    const ds = new Nedb(options);
+    logger.info(`Nedb - Loading ${name}`);
+    ds.loadDatabase(err => {
+        if (err !== null) {
+            logger.error(`Nedb - Error loading ${name}\n` + err);
+        }
+    });
+
+    return ds;
+};
+
 export default (container: interfaces.Container): void => {
-    container
-        .bind<INedbDatastore>(Types.DataStores.NedbDataStore)
-        .toDynamicValue((context: interfaces.Context) => {
-            const config = context.container.get<IConfig>(Types.Services.Config);
-            const ds = new Nedb(config.datastore.nedb.users);
-            ds.loadDatabase(err => {
-                if (err !== null) {
-                    const logger = context.container.get<ILogger>(Types.Services.Logger);
-                    logger.error('Article Database:' + err);
-                }
-            });
-
-            return ds;
-        })
-        .inSingletonScope()
-        .whenTargetNamed(NedbDataStoreTypes.USERS);
+    const config = container.get<IConfig>(Types.Services.Config);
+    const logger = container.get<ILogger>(Types.Services.Logger);
 
     container
         .bind<INedbDatastore>(Types.DataStores.NedbDataStore)
-        .toDynamicValue((context: interfaces.Context) => {
-            const config = context.container.get<IConfig>(Types.Services.Config);
-            const ds = new Nedb(config.datastore.nedb.articles);
-            ds.loadDatabase(err => {
-                if (err !== null) {
-                    const logger = context.container.get<ILogger>(Types.Services.Logger);
-                    logger.error('Article Database:' + err);
-                }
-            });
-
-            return ds;
-        })
+        .toDynamicValue((context: interfaces.Context) => nedbLoader('users', config.datastore.nedb.users, logger))
         .inSingletonScope()
-        .whenTargetNamed(NedbDataStoreTypes.ARTICLES);
+        .whenTargetNamed(Types.DataStores.NedbUserDataStore);
+
+    container
+        .bind<INedbDatastore>(Types.DataStores.NedbDataStore)
+        .toDynamicValue((context: interfaces.Context) => nedbLoader('articles', config.datastore.nedb.articles, logger))
+        .inSingletonScope()
+        .whenTargetNamed(Types.DataStores.NedbArticleDataStore);
 
     container
         .bind<interfaces.Factory<INedbDatastore>>(Types.DataStores.NedbFactory)
-        .toFactory<INedbDatastore>((context: interfaces.Context) => {
-            return (name: number) => {
-                return context.container.getNamed<INedbDatastore>(Types.DataStores.NedbDataStore, name);
-            };
-        });
+        .toFactory<INedbDatastore>((context: interfaces.Context) => (name: symbol) =>
+            context.container.getNamed<INedbDatastore>(Types.DataStores.NedbDataStore, name),
+        );
 };

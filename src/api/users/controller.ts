@@ -1,9 +1,9 @@
 import { inject } from 'inversify';
-import CrudController from '../../common/crud-controller';
-import { IUser, IUserResolver } from '../../interfaces';
-import Types from '../../ioc/types';
+import CrudController from 'app/common/crud-controller';
+import { IUser, IUserResolver, IUsersController } from 'app/interfaces';
+import Types from 'app/ioc/types';
 
-export default class UsersController extends CrudController<IUser> {
+export default class UsersController extends CrudController<IUser> implements IUsersController {
     /**
      * Users Controller constructor
      *

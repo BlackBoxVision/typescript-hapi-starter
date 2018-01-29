@@ -1,5 +1,5 @@
+import BasePlugin from 'app/plugin/base-plugin';
 import { injectable } from 'inversify';
-import BasePlugin from './base-plugin';
 
 @injectable()
 class Boom extends BasePlugin {

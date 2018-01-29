@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
-import { INedbDatastore, IRepository } from '../interfaces';
+import { INedbDatastore, IRepository } from 'app/interfaces';
 
 @injectable()
-export default class BaseNedbRepository<T> implements IRepository<T> {
+export default class BaseNedbRepository<T> implements IRepository<T, string> {
     /**
      * Datasource
      */
@@ -105,5 +105,13 @@ export default class BaseNedbRepository<T> implements IRepository<T> {
                 resolve(_id);
             });
         });
+    }
+
+    public async bulkUpdate(ids: string[], fields: T): Promise<T[]> {
+        return await Promise.all(ids.map(async id => await this.updateById(id, fields)));
+    }
+
+    public async bulkDelete(ids: string[]): Promise<string[]> {
+        return await Promise.all(ids.map(async id => await this.deleteById(id)));
     }
 }
