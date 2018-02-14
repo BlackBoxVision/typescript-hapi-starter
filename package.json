@@ -27,14 +27,14 @@
     ]
   },
   "dependencies": {
-    "hapi": "^16.5.2",
-    "hapi-boom-decorators": "^3.0.0",
-    "hapi-swagger": "^7.7.0",
+    "hapi": "^17.0.0",
+    "hapi-boom-decorators": "^4.0.0",
+    "hapi-swagger": "^8.0.0",
     "hapijs-status-monitor": "^0.6.0",
-    "inert": "^4.2.1",
-    "joi": "^10.6.0",
+    "inert": "^5.0.0",
+    "joi": "^13.0.0",
     "nedb": "^1.8.0",
-    "vision": "^4.1.1",
+    "vision": "^5.0.0",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6"
   },
