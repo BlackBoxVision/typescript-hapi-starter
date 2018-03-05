@@ -27,7 +27,7 @@
     ]
   },
   "dependencies": {
-    "hapi": "^16.5.2",
+    "hapi": "^17.0.0",
     "hapi-boom-decorators": "^3.0.0",
     "hapi-swagger": "^7.7.0",
     "hapijs-status-monitor": "^0.6.0",
