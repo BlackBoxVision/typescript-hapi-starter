@@ -36,10 +36,10 @@ export default class Server {
         }
     }
 
-    public static stop() {
+    public static stop(): Promise<Error | void> {
         Logger.info(`Server - Stopping!`);
 
-        return Server._instance.stop({ timeout: 10000 });
+        return Server._instance.stop();
     }
 
     public static async recycle(): Promise<Hapi.Server> {

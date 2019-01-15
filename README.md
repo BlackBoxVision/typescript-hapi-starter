@@ -17,10 +17,15 @@ This starter kit comes with the following features:
 - **Basic Test Suite with Tape**
 - **Coverage Report**
 
+## Requirements
+
+* NodeJS 10.x
+* Yarn 1.x
+
 ## How to use it? 
 
 1. Download this project as a zip.
-2. Run `npm install`
+2. Run `yarn install`
 3. Run `npm run nodemon:start`
 4. Visit [http://localhost:8080/documentation](http://localhost:8080/documentation) to view swagger docs.
 5. Visit [http://localhost:8080/api/users](http://localhost:8080/api/users) to test the REST API.
