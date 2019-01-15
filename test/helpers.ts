@@ -16,11 +16,11 @@ export const startServer = async (): Promise<Hapi.Server> => {
     return await Server.recycle();
 };
 
-export const stopServer = async (): Promise<Error | null> => {
+export const stopServer = async (): Promise<void> => {
     return await Server.stop();
 };
 
-export const extractPayload = <T>(response: Hapi.InjectedResponseObject): IPayload<T> => {
+export const extractPayload = <T>(response: Hapi.ServerInjectResponse): IPayload<T> => {
     const payload = JSON.parse(response.payload) as IPayload<T>;
 
     return payload;

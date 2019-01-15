@@ -14,10 +14,8 @@ export default class Server {
                 path: `${process.cwd()}/.env`,
             });
 
-            Server._instance = new Hapi.Server();
-
-            Server._instance.connection({
-                host: process.env.HOST,
+            Server._instance = new Hapi.Server({
+                host: 'localhost',
                 port: process.env.PORT,
             });
 
@@ -36,10 +34,10 @@ export default class Server {
         }
     }
 
-    public static stop(): Promise<Error | null> {
+    public static stop() {
         Logger.info(`Server - Stopping!`);
 
-        return Server._instance.stop();
+        return Server._instance.stop({ timeout: 10000 });
     }
 
     public static async recycle(): Promise<Hapi.Server> {
@@ -52,7 +50,7 @@ export default class Server {
         return Server._instance;
     }
 
-    public static async inject(options: string | Hapi.InjectedRequestOptions): Promise<Hapi.InjectedResponseObject> {
+    public static async inject(options: string | Hapi.ServerInjectOptions): Promise<Hapi.ServerInjectResponse> {
         return await Server._instance.inject(options);
     }
 }

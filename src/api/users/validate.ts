@@ -3,7 +3,9 @@ import * as Joi from 'joi';
 export default {
     create: {
         payload: {
-            age: Joi.number().integer().required(),
+            age: Joi.number()
+                .integer()
+                .required(),
             name: Joi.string().required(),
             lastName: Joi.string().required(),
         },
@@ -13,7 +15,9 @@ export default {
             id: Joi.string().required(),
         },
         payload: {
-            age: Joi.number().integer().optional(),
+            age: Joi.number()
+                .integer()
+                .optional(),
             name: Joi.string().optional(),
             lastName: Joi.string().optional(),
         },
