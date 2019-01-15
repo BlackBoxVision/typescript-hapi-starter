@@ -35,8 +35,7 @@
     "joi": "^14.3.1",
     "nedb": "^1.8.0",
     "vision": "^5.4.4",
-    "winston": "^2.3.1",
-    "winston-daily-rotate-file": "^1.4.6"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "@types/code": "^4.0.5",
@@ -48,13 +47,11 @@
     "@types/tape": "^4.2.33",
     "@types/winston": "^2.3.3",
     "dotenv": "^6.2.0",
-    "lab": "^15.1.2",
-    "lab-transform-typescript": "^3.0.1",
     "nodemon": "^1.11.0",
     "nyc": "^13.1.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.5.2",
-    "tap-spec": "^4.1.1",
+    "tap-spec": "^5.0.0",
     "tape": "^4.8.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.4.3",

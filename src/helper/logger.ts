@@ -1,24 +1,29 @@
-import { Logger, transports as Transports, LoggerInstance } from 'winston';
-import 'winston-daily-rotate-file';
+import * as Winston from 'winston';
+import * as Dotenv from 'dotenv';
+
+Dotenv.config();
 
 export class ApiLogger {
-    public static newInstance(): LoggerInstance {
-        const rotateFileTransport = new Transports.DailyRotateFile({
+    public static newInstance(): Winston.Logger {
+        const consoleTransport = new Winston.transports.Console({
+            format: Winston.format.combine(
+                Winston.format.colorize(),
+                Winston.format.timestamp(),
+                Winston.format.align(),
+                Winston.format.printf(info => {
+                    const { timestamp, level, message, ...args } = info;
+
+                    const ts = timestamp.slice(0, 19).replace('T', ' ');
+                    return `${ts} [${level}]: ${message} ${
+                        Object.keys(args).length ? JSON.stringify(args, null, 2) : ''
+                    }`;
+                }),
+            ),
             level: process.env.LOG_LEVEL,
-            datePattern: 'dd-MM-yyyy.',
-            dirname: './logs',
-            filename: './log',
-            prepend: true,
         });
 
-        const consoleTransport = new Transports.Console({
-            colorize: true,
-            prettyPrint: true,
-            level: process.env.NODE_ENV === 'test' ? 'warn' : 'info',
-        });
-
-        return new Logger({
-            transports: [rotateFileTransport, consoleTransport],
+        return Winston.createLogger({
+            transports: [consoleTransport],
         });
     }
 }

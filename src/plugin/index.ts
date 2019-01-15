@@ -56,7 +56,7 @@ export default class Plugins {
     }
 
     private static register(server: Hapi.Server, plugin: any): Promise<void> {
-        Logger.info('registering: ' + JSON.stringify(plugin));
+        Logger.debug('registering: ' + JSON.stringify(plugin));
         return new Promise((resolve, reject) => {
             server.register(plugin);
             resolve();
