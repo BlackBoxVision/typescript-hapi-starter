@@ -25,8 +25,8 @@ export default class Server {
             await Server._instance.start();
 
             Logger.info('Server - Up and running!');
-            Logger.info('Visit: http://' + process.env.HOST + ':' + process.env.PORT + '/api/users for REST API');
-            Logger.info('Visit: http://' + process.env.HOST + ':' + process.env.PORT + '/documentation for Swagger docs');
+            Logger.info(`Visit: http://${process.env.HOST}:${process.env.PORT}/api/users for REST API`);
+            Logger.info(`Visit: http://${process.env.HOST}:${process.env.PORT}/documentation for Swagger docs`);
 
             return Server._instance;
         } catch (error) {
