@@ -14,9 +14,7 @@ export default class Server {
                 path: `${process.cwd()}/.env`,
             });
 
-            Server._instance = new Hapi.Server();
-
-            Server._instance.connection({
+            Server._instance = new Hapi.Server({
                 host: process.env.HOST,
                 port: process.env.PORT,
             });
@@ -26,7 +24,9 @@ export default class Server {
 
             await Server._instance.start();
 
-            Logger.info(`Server - Up and running!`);
+            Logger.info('Server - Up and running!');
+            Logger.info(`Visit: http://${process.env.HOST}:${process.env.PORT}/api/users for REST API`);
+            Logger.info(`Visit: http://${process.env.HOST}:${process.env.PORT}/documentation for Swagger docs`);
 
             return Server._instance;
         } catch (error) {
@@ -36,10 +36,10 @@ export default class Server {
         }
     }
 
-    public static stop(): Promise<Error | null> {
+    public static stop() {
         Logger.info(`Server - Stopping!`);
 
-        return Server._instance.stop();
+        return Server._instance.stop({ timeout: 10000 });
     }
 
     public static async recycle(): Promise<Hapi.Server> {
@@ -52,7 +52,7 @@ export default class Server {
         return Server._instance;
     }
 
-    public static async inject(options: string | Hapi.InjectedRequestOptions): Promise<Hapi.InjectedResponseObject> {
+    public static async inject(options: string | Hapi.ServerInjectOptions): Promise<Hapi.ServerInjectResponse> {
         return await Server._instance.inject(options);
     }
 }

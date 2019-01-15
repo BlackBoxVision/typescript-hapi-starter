@@ -10,8 +10,8 @@ This starter kit comes with the following features:
 - **Status Monitor**
 - **.env files support**
 - **nodemon for hot-reload**
-- **Daily Rotation Logger + Console Logger** 
-- **Work with Yarn or NPM 5 as dependency resolvers**
+- **Pretty Console Logger with Winston** 
+- **Work with Yarn or NPM 6 as dependency resolvers**
 - **Code formatting with Prettier as hook for Pre-commit**
 - **Dockerfile + docker-compose for development**
 - **Basic Test Suite with Tape**
@@ -19,9 +19,14 @@ This starter kit comes with the following features:
 
 ## How to use it? 
 
-Now there's a CLI that currently support creating a new project from this repo: [create-typescript-api](https://github.com/BlackBoxVision/create-typescript-api)
+1. Download this project as a zip.
+2. Run `npm install`
+3. Run `npm run nodemon:start`
+4. Visit [http://localhost:8080/documentation](http://localhost:8080/documentation) to view swagger docs.
+5. Visit [http://localhost:8080/api/users](http://localhost:8080/api/users) to test the REST API.
 
-Other option is to **Fork** it, or **download** it as .zip file.
+OUTDATED: Now there's a CLI that currently support creating a new project from this repo: [create-typescript-api](https://github.com/BlackBoxVision/create-typescript-api)
+
 
 ## TODO
 
