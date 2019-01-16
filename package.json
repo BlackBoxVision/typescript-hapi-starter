@@ -12,7 +12,8 @@
     "node" : ">=10.0" 
   }, 
   "scripts": {
-    "start": "./node_modules/.bin/tsc --module commonjs --allowJs --outDir build/ --sourceMap --target es6 src/index.ts && node build/index.js",
+    "build-ts": "tsc",
+    "start": "node dist/src/index.js",
     "docker:logs": "docker-compose logs",
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up",
@@ -21,6 +22,7 @@
     "nodemon:start": "npm run nodemon:build",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
+    "postinstall": "npm run build-ts",
     "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec"
   },
   "nyc": {
@@ -32,6 +34,13 @@
     ]
   },
   "dependencies": {
+    "@types/code": "^4.0.5",
+    "@types/dotenv": "^6.1.0",
+    "@types/hapi": "^17.8.2",
+    "@types/joi": "^14.0.1",
+    "@types/nedb": "^1.8.3",
+    "@types/node": "^10.12.18",
+    "@types/tape": "^4.2.33",
     "hapi": "^17.8.1",
     "hapi-boom-decorators": "^4.1.2",
     "hapi-swagger": "^9.3.0",
@@ -40,17 +49,10 @@
     "joi": "^14.3.1",
     "nedb": "^1.8.0",
     "vision": "^5.4.4",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "dotenv": "^6.2.0"
   },
   "devDependencies": {
-    "@types/code": "^4.0.5",
-    "@types/dotenv": "^6.1.0",
-    "@types/hapi": "^17.8.2",
-    "@types/joi": "^14.0.1",
-    "@types/nedb": "^1.8.3",
-    "@types/node": "^10.12.18",
-    "@types/tape": "^4.2.33",
-    "dotenv": "^6.2.0",
     "nodemon": "^1.11.0",
     "nyc": "^13.1.0",
     "prettier": "^1.5.2",

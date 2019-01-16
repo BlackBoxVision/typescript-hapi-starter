@@ -16,7 +16,7 @@ export const startServer = async (): Promise<Hapi.Server> => {
     return await Server.recycle();
 };
 
-export const stopServer = async (): Promise<void> => {
+export const stopServer = async (): Promise<void | Error> => {
     return await Server.stop();
 };
 

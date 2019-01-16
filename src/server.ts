@@ -15,7 +15,6 @@ export default class Server {
             });
 
             Server._instance = new Hapi.Server({
-                host: process.env.HOST,
                 port: process.env.PORT,
             });
 
