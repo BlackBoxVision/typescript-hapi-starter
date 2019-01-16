@@ -12,6 +12,7 @@
     "node" : ">=10.0" 
   }, 
   "scripts": {
+    "start": "./node_modules/.bin/tsc --module commonjs --allowJs --outDir build/ --sourceMap --target es6 src/index.ts && node build/index.js",
     "docker:logs": "docker-compose logs",
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up",
