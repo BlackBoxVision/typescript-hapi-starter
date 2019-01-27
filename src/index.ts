@@ -9,7 +9,7 @@ import Logger from './helper/logger';
 process.on('SIGINT', () => {
     Logger.info('Stopping hapi server');
 
-    Server.stop().then((err) => {
+    Server.stop().then(err => {
         Logger.info(`Server stopped`);
         process.exit(err ? 1 : 0);
     });
