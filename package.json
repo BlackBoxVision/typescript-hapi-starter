@@ -8,9 +8,9 @@
   "license": "MIT",
   "name": "typescript-hapi-starter",
   "version": "1.0.0",
-  "engines" : { 
-    "node" : ">=10.0" 
-  }, 
+  "engines": {
+    "node": ">=10.0"
+  },
   "scripts": {
     "build-ts": "tsc",
     "start": "node dist/src/index.js",
@@ -23,7 +23,9 @@
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --trailing-comma all --write 'src/**/*.ts'",
     "postinstall": "npm run build-ts",
-    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec"
+    "test": "NODE_ENV=test nyc --reporter=lcov --require ts-node/register tape test/**/*.spec.{ts,js} | tap-spec",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "nyc": {
     "include": [
@@ -50,7 +52,8 @@
     "nedb": "^1.8.0",
     "vision": "^5.4.4",
     "winston": "^3.1.0",
-    "dotenv": "^6.2.0"
+    "dotenv": "^6.2.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
@@ -68,5 +71,6 @@
     "hapi",
     "typescript",
     "swagger"
-  ]
+  ],
+  "snyk": true
 }
