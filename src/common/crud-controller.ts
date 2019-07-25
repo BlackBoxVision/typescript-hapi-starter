@@ -2,6 +2,7 @@ import * as Boom from '@hapi/boom';
 import * as Hapi from '@hapi/hapi';
 import CrudResolver from '../common/base-resolver';
 import Logger from '../helper/logger';
+import newResponse from '../helper/response';
 
 export default class CrudController<T> {
   constructor(private crudResolver: CrudResolver<T>) {}
@@ -15,21 +16,17 @@ export default class CrudController<T> {
 
       const data: any = await this.crudResolver.save(request.payload as any);
 
-      return toolkit.response({
-        meta: {
-          method: request.method.toUpperCase(),
-          operation: request.url.pathname,
-          paging: null,
-        },
-        data: [
-          {
-            id: data['_id'],
-          },
-        ],
-        errors: [],
-      });
+      return toolkit.response(
+        newResponse(request, {
+          value: { id: data['_id'] },
+        })
+      );
     } catch (error) {
-      return Boom.badImplementation(error);
+      return toolkit.response(
+        newResponse(request, {
+          boom: Boom.badImplementation(error),
+        })
+      );
     }
   };
 
@@ -42,22 +39,30 @@ export default class CrudController<T> {
 
       const id = encodeURIComponent(request.params.id);
 
-      const entity: T = await this.crudResolver.updateOneById(
+      const updatedEntity: T = await this.crudResolver.updateOneById(
         id,
         request.payload
       );
 
-      return toolkit.response({
-        meta: {
-          method: request.method.toUpperCase(),
-          operation: request.url.pathname,
-          paging: null,
-        },
-        data: entity ? [entity] : [],
-        errors: [],
-      });
+      if (!updatedEntity) {
+        return toolkit.response(
+          newResponse(request, {
+            boom: Boom.notFound(),
+          })
+        );
+      }
+
+      return toolkit.response(
+        newResponse(request, {
+          value: updatedEntity,
+        })
+      );
     } catch (error) {
-      return Boom.badImplementation(error);
+      return toolkit.response(
+        newResponse(request, {
+          boom: Boom.badImplementation(error),
+        })
+      );
     }
   };
 
@@ -72,17 +77,25 @@ export default class CrudController<T> {
 
       const entity: T = await this.crudResolver.getOneById(id);
 
-      return toolkit.response({
-        meta: {
-          method: request.method.toUpperCase(),
-          operation: request.url.pathname,
-          paging: null,
-        },
-        data: entity ? [entity] : [],
-        errors: [],
-      });
+      if (!entity) {
+        return toolkit.response(
+          newResponse(request, {
+            boom: Boom.notFound(),
+          })
+        );
+      }
+
+      return toolkit.response(
+        newResponse(request, {
+          value: entity,
+        })
+      );
     } catch (error) {
-      return Boom.badImplementation(error);
+      return toolkit.response(
+        newResponse(request, {
+          boom: Boom.badImplementation(error),
+        })
+      );
     }
   };
 
@@ -95,17 +108,17 @@ export default class CrudController<T> {
 
       const entities: T[] = await this.crudResolver.getAll();
 
-      return toolkit.response({
-        meta: {
-          method: request.method.toUpperCase(),
-          operation: request.url.pathname,
-          paging: null,
-        },
-        data: entities,
-        errors: [],
-      });
+      return toolkit.response(
+        newResponse(request, {
+          value: entities,
+        })
+      );
     } catch (error) {
-      return Boom.badImplementation(error);
+      return toolkit.response(
+        newResponse(request, {
+          boom: Boom.badImplementation(error),
+        })
+      );
     }
   };
 
@@ -120,17 +133,17 @@ export default class CrudController<T> {
 
       await this.crudResolver.deleteOneById(id);
 
-      return toolkit.response({
-        meta: {
-          method: request.method.toUpperCase(),
-          operation: request.url.pathname,
-          paging: null,
-        },
-        data: [id],
-        errors: [],
-      });
+      return toolkit.response(
+        newResponse(request, {
+          value: id,
+        })
+      );
     } catch (error) {
-      return Boom.badImplementation(error);
+      return toolkit.response(
+        newResponse(request, {
+          boom: Boom.badImplementation(error),
+        })
+      );
     }
   };
 }
