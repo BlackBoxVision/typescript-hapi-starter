@@ -1,35 +1,35 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 
 export default {
-    create: {
-        payload: {
-            age: Joi.number()
-                .integer()
-                .required(),
-            name: Joi.string().required(),
-            lastName: Joi.string().required(),
-        },
+  create: {
+    payload: {
+      age: Joi.number()
+        .integer()
+        .required(),
+      name: Joi.string().required(),
+      lastName: Joi.string().required(),
     },
-    updateById: {
-        params: {
-            id: Joi.string().required(),
-        },
-        payload: {
-            age: Joi.number()
-                .integer()
-                .optional(),
-            name: Joi.string().optional(),
-            lastName: Joi.string().optional(),
-        },
+  },
+  updateById: {
+    params: {
+      id: Joi.string().required(),
     },
-    getById: {
-        params: {
-            id: Joi.string().required(),
-        },
+    payload: {
+      age: Joi.number()
+        .integer()
+        .optional(),
+      name: Joi.string().optional(),
+      lastName: Joi.string().optional(),
     },
-    deleteById: {
-        params: {
-            id: Joi.string().required(),
-        },
+  },
+  getById: {
+    params: {
+      id: Joi.string().required(),
     },
+  },
+  deleteById: {
+    params: {
+      id: Joi.string().required(),
+    },
+  },
 };
