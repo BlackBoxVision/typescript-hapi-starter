@@ -12,7 +12,7 @@ export default {
   },
   updateById: {
     params: {
-      id: Joi.string().required(),
+      USER_ID: Joi.string().required(),
     },
     payload: {
       age: Joi.number()
@@ -24,12 +24,12 @@ export default {
   },
   getById: {
     params: {
-      id: Joi.string().required(),
+      USER_ID: Joi.string().required(),
     },
   },
   deleteById: {
     params: {
-      id: Joi.string().required(),
+      USER_ID: Joi.string().required(),
     },
   },
 };

@@ -39,7 +39,7 @@ export default function createResponse<T>(
     });
   }
 
-  if (data) {
+  if (value && data) {
     if (Array.isArray(value)) {
       data.push(...value);
     } else {

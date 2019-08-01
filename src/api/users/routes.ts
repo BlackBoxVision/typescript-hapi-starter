@@ -8,7 +8,9 @@ export default class UserRoutes implements IRoute {
   public async register(server: Hapi.Server): Promise<any> {
     return new Promise(resolve => {
       Logger.info('UserRoutes - Start adding user routes');
-      const controller = new UserController();
+
+      // Passing ID by constructor it's not neccesary as default value it's 'id'
+      const controller = new UserController('USER_ID');
 
       server.route([
         {
@@ -24,7 +26,7 @@ export default class UserRoutes implements IRoute {
         },
         {
           method: 'PUT',
-          path: '/api/users/{id}',
+          path: `/api/users/{${controller.id}}`,
           options: {
             handler: controller.updateById,
             validate: validate.updateById,
@@ -35,7 +37,7 @@ export default class UserRoutes implements IRoute {
         },
         {
           method: 'GET',
-          path: '/api/users/{id}',
+          path: `/api/users/{${controller.id}}`,
           options: {
             handler: controller.getById,
             validate: validate.getById,
@@ -56,7 +58,7 @@ export default class UserRoutes implements IRoute {
         },
         {
           method: 'DELETE',
-          path: '/api/users/{id}',
+          path: `/api/users/{${controller.id}}`,
           options: {
             handler: controller.deleteById,
             validate: validate.deleteById,

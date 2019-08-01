@@ -3,7 +3,7 @@ import CrudController from '../../common/crud-controller';
 import User from '../../model/user';
 
 export default class UserController extends CrudController<User> {
-  constructor() {
-    super(new UserResolver());
+  constructor(id?: string) {
+    super(id, new UserResolver());
   }
 }

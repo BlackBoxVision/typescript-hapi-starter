@@ -5,7 +5,10 @@ import Logger from '../helper/logger';
 import newResponse from '../helper/response';
 
 export default class CrudController<T> {
-  constructor(private crudResolver: CrudResolver<T>) {}
+  constructor(
+    public id: string = 'id',
+    private crudResolver: CrudResolver<T>
+  ) {}
 
   public create = async (
     request: Hapi.Request,
@@ -37,7 +40,7 @@ export default class CrudController<T> {
     try {
       Logger.info(`PUT - ${request.url.href}`);
 
-      const id = encodeURIComponent(request.params.id);
+      const id = encodeURIComponent(request.params[this.id]);
 
       const updatedEntity: T = await this.crudResolver.updateOneById(
         id,
@@ -73,7 +76,7 @@ export default class CrudController<T> {
     try {
       Logger.info(`GET - ${request.url.href}`);
 
-      const id = encodeURIComponent(request.params.id);
+      const id = encodeURIComponent(request.params[this.id]);
 
       const entity: T = await this.crudResolver.getOneById(id);
 
@@ -129,7 +132,7 @@ export default class CrudController<T> {
     try {
       Logger.info(`DELETE - ${request.url.href}`);
 
-      const id = encodeURIComponent(request.params.id);
+      const id = encodeURIComponent(request.params[this.id]);
 
       await this.crudResolver.deleteOneById(id);
 
