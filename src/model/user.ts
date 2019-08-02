@@ -7,11 +7,14 @@ export default class User {
 
   public lastName: string;
 
+  public creationDate: Date;
+
   constructor(name: string) {
     this._id = 'test';
     this.name = name;
     this.age = 12;
     this.lastName = 'Smith';
+    this.creationDate = new Date();
   }
 
   public toString() {

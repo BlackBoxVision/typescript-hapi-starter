@@ -21,7 +21,7 @@ export default class CrudController<T> {
 
       return toolkit.response(
         newResponse(request, {
-          value: { id: data['_id'] },
+          value: { _id: data['_id'] },
         })
       );
     } catch (error) {
@@ -138,7 +138,7 @@ export default class CrudController<T> {
 
       return toolkit.response(
         newResponse(request, {
-          value: id,
+          value: { _id: id },
         })
       );
     } catch (error) {
