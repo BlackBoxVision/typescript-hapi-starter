@@ -43,11 +43,11 @@ export default class Repository<T> {
 
   public updateById(_id: string, data: T): Promise<T> {
     return new Promise((resolve, reject) => {
-      this.dataSource.update({ _id }, data, undefined, error => {
+      this.dataSource.update({ _id }, data, {}, error => {
         if (error) {
           reject(error);
         }
-
+        
         this.getById(_id).then(value => resolve(value));
       });
     });

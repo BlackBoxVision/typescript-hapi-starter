@@ -1,7 +1,6 @@
 export default {
   swagger: {
     options: {
-      jsonEditor: true,
       info: {
         title: 'API Documentation',
         version: 'v1.0.0',
