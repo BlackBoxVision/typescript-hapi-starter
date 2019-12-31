@@ -5,3 +5,4 @@ logs/*.log
 .nyc_output/
 coverage/
 build
+yarn.lock
