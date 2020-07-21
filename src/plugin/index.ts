@@ -24,7 +24,7 @@ export default class Plugins {
 
       await Plugins.register(server, [
         require('vision'),
-        require('inert'),
+        require('@hapi/inert'),
         {
           options: Config.swagger.options,
           plugin: require('hapi-swagger'),
