@@ -23,7 +23,7 @@ export default class Plugins {
       Logger.info('Plugins - Registering swagger-ui');
 
       await Plugins.register(server, [
-        require('vision'),
+        require('@hapi/vision'),
         require('@hapi/inert'),
         {
           options: Config.swagger.options,

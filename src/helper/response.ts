@@ -21,7 +21,7 @@ interface IResponse<T> {
 
 interface IResponseOptions<T> {
   value?: T | null | undefined;
-  boom?: Boom<any> | null | undefined;
+  boom?: Boom.Boom<any> | null | undefined;
 }
 
 export default function createResponse<T>(

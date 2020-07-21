@@ -16,6 +16,8 @@ export default class Server {
       Server._instance = new Hapi.Server({
         port: process.env.PORT,
       });
+      
+      Server._instance.validator(require('@hapi/joi'));
 
       await Plugin.registerAll(Server._instance);
       await Router.loadRoutes(Server._instance);
