@@ -67,7 +67,7 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.1.0",
+    "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^8.1.0",
     "@types/code": "^4.0.5",
     "@types/dotenv": "^6.1.1",
@@ -82,10 +82,10 @@
     "@types/tape": "^4.2.33",
     "husky": "^3.0.1",
     "lint-staged": "^9.2.1",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.19.4",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
-    "tap": "^14.10.5",
+    "tap": "^14.10.7",
     "tap-spec": "^5.0.0",
     "tape": "^4.8.0",
     "ts-node": "^8.3.0",
