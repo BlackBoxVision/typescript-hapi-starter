@@ -58,7 +58,7 @@
     "@hapi/joi": "^15.1.0",
     "@hapi/vision": "^5.5.2",
     "dotenv": "^8.0.0",
-    "hapi-swagger": "^10.0.2",
+    "hapi-swagger": "^11.0.0",
     "hapijs-status-monitor": "github:ziyasal/hapijs-status-monitor",
     "inert": "^5.1.3",
     "nedb": "^1.8.0",
