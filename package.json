@@ -25,8 +25,8 @@
     "postinstall": "npm run build",
     "test": "NODE_ENV=test nyc --reporter=lcov -r tsconfig-paths/register -r ts-node/register tape test/**/*.spec.{ts,js} | tap-spec",
     "tap": "tap",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "snyk-protect": "snyk-protect",
+    "prepublish": "yarn run snyk-protect"
   },
   "nyc": {
     "include": [
@@ -62,8 +62,8 @@
     "hapi-swagger": "^13.0.2",
     "hapijs-status-monitor": "github:ziyasal/hapijs-status-monitor",
     "nedb": "^1.8.0",
-    "snyk": "^1.189.0",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
