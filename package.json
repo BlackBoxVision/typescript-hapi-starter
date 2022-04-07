@@ -63,7 +63,7 @@
     "hapijs-status-monitor": "github:ziyasal/hapijs-status-monitor",
     "nedb": "^1.8.0",
     "snyk": "^1.189.0",
-    "winston": "^3.1.0"
+    "winston": "^3.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
