@@ -62,7 +62,7 @@
     "hapi-swagger": "^13.0.2",
     "hapijs-status-monitor": "github:ziyasal/hapijs-status-monitor",
     "nedb": "^1.8.0",
-    "snyk": "^1.189.0",
+    "snyk": "^1.465.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {
