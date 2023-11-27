@@ -59,10 +59,10 @@
     "@hapi/vision": "^6.0.0",
     "@types/mime-db": "^1.43.0",
     "dotenv": "^8.0.0",
-    "hapi-swagger": "^13.0.2",
+    "hapi-swagger": "^14.5.4",
     "hapijs-status-monitor": "github:ziyasal/hapijs-status-monitor",
     "nedb": "^1.8.0",
-    "snyk": "^1.189.0",
+    "snyk": "^1.685.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {
